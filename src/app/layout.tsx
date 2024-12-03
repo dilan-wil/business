@@ -20,15 +20,127 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <head>
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          name="description"
+          content="Easy, Secure and Best Way to Earn money from the comfort of your home."
+        />
+        <meta property="og:image" content="1.jpg" />
+        <link
+          rel="icon"
+          href="assets/global/images/HXvcMgkWDU3l3zTUsioQ.png"
+          type="image/x-icon"
+        />
+
+        <title>PayTime Cash - Home</title>
+
+        {/* CSS */}
+        <link
+          rel="stylesheet"
+          href="assets/frontend/default/css/bootstrap.min.css"
+        />
+        <link
+          rel="stylesheet"
+          href="assets/frontend/default/css/fontawesome-pro.css"
+        />
+        <link
+          rel="stylesheet"
+          href="assets/frontend/default/css/odometer-default.min.css"
+        />
+        <link
+          rel="stylesheet"
+          href="assets/frontend/default/css/swiper.min.css"
+        />
+        <link
+          rel="stylesheet"
+          href="assets/frontend/default/css/nice-select.css"
+        />
+        <link
+          rel="stylesheet"
+          href="assets/frontend/default/css/select2.min.css"
+        />
+        <link
+          rel="stylesheet"
+          href="assets/frontend/default/css/iconsax.css"
+        />
+        <link
+          rel="stylesheet"
+          href="assets/frontend/default/css/spacing.css"
+        />
+        <link
+          rel="stylesheet"
+          href="assets/frontend/default/css/styles7839.css?v=1.2"
+        />
+
+        {/* Inline CSS */}
+        <style>
+          {`
+            .whatsapp-widget, .telegram-widget, .youtube-widget {
+              position: fixed;
+              right: 20px;
+              color: white;
+              padding: 10px 20px;
+              border-radius: 50px;
+              text-align: center;
+              cursor: pointer;
+              font-family: Arial, sans-serif;
+              box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+              display: flex;
+              align-items: center;
+            }
+            .whatsapp-widget {
+              bottom: 165px;
+              background-color: #25D366;
+            }
+            .telegram-widget {
+              bottom: 220px;
+              background-color: #0088cc;
+            }
+            .youtube-widget {
+              bottom: 110px;
+              background-color: #ff0000;
+            }
+            .whatsapp-widget img, .telegram-widget img, .youtube-widget img {
+              width: 24px;
+              height: 24px;
+              margin-right: 10px;
+            }
+          `}
+        </style>
+      </head>
+      <body className="landing-page-bg">
         {children}
+
+        {/* JavaScript */}
+        <script src="assets/frontend/default/js/jquery-3.7.1.min.js"></script>
+        <script src="assets/frontend/default/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/frontend/default/js/jquery.nice-select.min.js"></script>
+        <script src="assets/frontend/default/js/jquery.appear.min.js"></script>
+        <script src="assets/frontend/default/js/odometer.min.js"></script>
+        <script src="assets/frontend/default/js/swiper.min.js"></script>
+        <script src="assets/frontend/default/js/meanmenu.min.js"></script>
+        <script src="assets/frontend/default/js/landing.js"></script>
+        <script src="assets/global/js/lucide.min.js"></script>
+        <script src="assets/frontend/default/js/sidebar.js"></script>
+        <script src="assets/frontend/default/js/main.js"></script>
+        <script src="assets/global/js/custom.js"></script>
+        <script src="assets/frontend/default/js/landingff3e.js?v1.0"></script>
+        <script>
+          {`
+            "use strict";
+            $(".color-switcher").on('click', function () {
+              $("body").toggleClass("dark-theme");
+              $.get('theme-mode.html');
+            });
+          `}
+        </script>
       </body>
     </html>
   );
