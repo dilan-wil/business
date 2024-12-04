@@ -13,11 +13,11 @@ export function Socials() {
             <div className="col-xxl-6 col-xl-6 col-lg-6">
                 <div className="social-marketing-content">
                     <div className="section-title-wrapper">
-                        <h2 className="section-title mb-30">Community Service is Calling, No Need for Stalling</h2>
+                        <h2 className="section-title mb-30">Rejoignez notre communauté whatsapp</h2>
                     </div>
-                    <p className="description">You can get the golden opportunity to actually win a lot of profit here.</p>
+                    <p className="description">Rejoignez le groupe whatsapp.</p>
                     <div className="btn-inner">
-                        <a className="site-btn primary-btn btn-xs" href="register.html" target="_self">Join Us <i className="icon-profile-circle"></i> </a>
+                        <a className="site-btn primary-btn btn-xs" href="register" target="_self">Rejoindre <i className="icon-profile-circle"></i> </a>
                     </div>
                 </div>
             </div>
@@ -26,7 +26,7 @@ export function Socials() {
 </section>
 
     {/*notification*/}
-<section className="newsletter-section section-space">
+{/* <section className="newsletter-section section-space">
     <div className="container">
         <div className="newsletter-main include-bg" data-background="assets/global/images/M1cPOEfzavv1gMoJgvl3.jpg">
             <div className="newsletter-grid">
@@ -44,7 +44,7 @@ export function Socials() {
             </div>
         </div>
     </div>
-</section>
+</section> */}
         </>
     )
 }

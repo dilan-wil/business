@@ -7,6 +7,7 @@ import { Footer } from "@/components/home/footer";
 import { Plans } from "@/components/home/plans";
 import { Socials } from "@/components/home/socials";
 import { Banner } from "@/components/home/banner"
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -57,18 +58,18 @@ export default function Home() {
                         </div>
                     </div>
                     <div className="earn-card">
-                        <p>Earn ₦3500</p>
+                        <p>Jusqu'à 30%</p>
                     </div>
                 </div>
             </div>
             <div className="col-xxl-6 col-xl-6 col-lg-6">
                 <div className="invite-content">
-                    <h2 className="section-title mb-30">Invite Friends and Earn</h2>
-                    <p className="b2">Get paid ₦3500 instantly for every of your Friends and Family  you invite.
+                    <h2 className="section-title mb-30">Invitez des amis et gagnez</h2>
+                    <p className="b2">Recevez jusqu'à 30% des gains que font votre fileuil
                     </p>
                     <div className="btn-inner">
-                        <a className="site-btn primary-btn btn-xs" href="register.html" target="_blank">Create Account <i className="icon-arrow-circle-right"></i>
-                        </a>
+                        <Link className="site-btn primary-btn btn-xs" href="register" target="_blank">Créez un compte<i className="icon-arrow-circle-right"></i>
+                        </Link>
                     </div>
                 </div>
             </div>
