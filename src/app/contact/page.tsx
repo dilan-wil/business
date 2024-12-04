@@ -1,9 +1,14 @@
+import { ContactForm } from "@/components/home/contact-form";
+import { Footer } from "@/components/home/footer";
+import { Header } from "@/components/home/header";
 
 
 
 export default function Page(){
     return(
         <>
+
+            <Header />
             <main className="fix">
                 <section className="breadcrumb-area fix breadcrumb-overlay style-one position-relative"
                         data-background="https://paytimecash.9r3.site/assets//frontend/default/images/breadcrumb/breadcrumb-01.jpg ">
@@ -40,8 +45,9 @@ export default function Page(){
                     </div>
                 </section>
 
-
+                <ContactForm />
                 </main>
+                <Footer />
         </>
     )
 }

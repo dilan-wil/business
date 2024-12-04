@@ -9,13 +9,13 @@ export default function Page(){
 
             <main className="fix">
                 
-    <section className="br /eadcrumb-area fix br /eadcrumb-overlay style-one position-relative"
-             data-background="https://paytimecash.9r3.site/assets//frontend/default/images/br /eadcrumb/br /eadcrumb-01.jpg ">
+    <section className="breadcrumb-area fix breadcrumb-overlay style-one position-relative"
+             data-background="https://paytimecash.9r3.site/assets//frontend/default/images/breadcrumb/breadcrumb-01.jpg ">
         <div className="container">
             <div className="row justify-content-center">
                 <div className="col-xxl-8 col-xl-8">
-                    <div className="br /eadcrumb-content-wrapper">
-                        <div className="br /eadcrumb-content">
+                    <div className="breadcrumb-content-wrapper">
+                        <div className="breadcrumb-content">
                             <h1 className="title">    Terms and Conditions
 </h1>
                         </div>
@@ -23,23 +23,23 @@ export default function Page(){
                 </div>
             </div>
         </div>
-        <div className="br /eadcrumb-round">
+        <div className="breadcrumb-round">
             <div className="round-one"></div>
             <div className="round-two"></div>
             <div className="round-three"></div>
         </div>
-        <div className="br /eadcrumb-shapes">
+        <div className="breadcrumb-shapes">
             <div className="shape-one">
-                <img src="assets/frontend/default/images/shapes/br /eadcrumb/1.svg" alt="shape not found" />
+                <img src="assets/frontend/default/images/shapes/breadcrumb/1.svg" alt="shape not found" />
             </div>
             <div className="shape-two">
-                <img src="assets/frontend/default/images/shapes/br /eadcrumb/2.svg" alt="shape not found" />
+                <img src="assets/frontend/default/images/shapes/breadcrumb/2.svg" alt="shape not found" />
             </div>
             <div className="shape-three">
-                <img src="assets/frontend/default/images/shapes/br /eadcrumb/3.svg" alt="shape not found" />
+                <img src="assets/frontend/default/images/shapes/breadcrumb/3.svg" alt="shape not found" />
             </div>
             <div className="shape-four">
-                <img src="assets/frontend/default/images/shapes/br /eadcrumb/4.svg" alt="shape not found" />
+                <img src="assets/frontend/default/images/shapes/breadcrumb/4.svg" alt="shape not found" />
             </div>
         </div>
     </section>
