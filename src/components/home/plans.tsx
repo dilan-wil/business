@@ -45,13 +45,13 @@ export function Plans() {
             total: 1200000
         },
         {
-            name: "Minage-A",
+            name: "Minage-H",
             price: 420000,
             daily: 70000,
             total: 2100000
         },
         {
-            name: "Minage-A",
+            name: "Minage-I",
             price: 780000,
             daily: 130000,
             total: 3900000

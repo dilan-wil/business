@@ -15,7 +15,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 //     avatar: "default_avatar.png", // Default avatar
 //   })
     const [opened, setOpened] = React.useState(true)
-  const currentDate = new Date()
+    const currentDate = new Date()
 
   // This useEffect will fetch and set the income as soon as the user is authenticated
 //   React.useEffect(() => {
