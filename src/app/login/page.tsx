@@ -91,7 +91,7 @@ export default function Page(){
                             <div className="single-input has-left-icon">
                                 <label className="input-label" >Email Address<span className="text-danger">*</span></label>
                                 <div className="input-field">
-                                    <input onChange={handleChange} type="email" className="box-input email-input" name="email" value="" required />
+                                    <input onChange={handleChange} type="email" className="box-input email-input" name="email" required />
                                     <span className="icon">
                                     <i className="icon-sms"></i>
                                     </span>
