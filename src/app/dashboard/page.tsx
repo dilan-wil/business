@@ -109,12 +109,9 @@ export default function Page(){
                                         </div>
                                     </div>
 
-                                    <h3 className="title">Share Your Referral
-                                        Link</h3>
+                                    <h3 className="title">Partagez votre lien d'affiliation</h3>
                                     <p className="description">
-                                        You can also share your referral link by
-                                        coping <br/>and sending it or sharing it
-                                        to your social media
+                                        Vous pouvez copiez votre lien et l'envoyer à vos amis<br/>ou directement envoyer via le bouton "partager"
                                     </p>
                                     <div>
 

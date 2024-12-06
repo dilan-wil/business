@@ -2,6 +2,16 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { AuthProvider } from "@/components/context/auth-context";
+import '../../public/assets/frontend/default/css/bootstrap.min.css'
+import '../../public/assets/frontend/default/css/fontawesome-pro.css'
+import '../../public/assets/frontend/default/css/odometer-default.min.css'
+import '../../public/assets/frontend/default/css/swiper.min.css'
+import '../../public/assets/frontend/default/css/nice-select.css'
+import '../../public/assets/frontend/default/css/select2.min.css'
+import '../../public/assets/frontend/default/css/iconsax.css'
+import '../../public/assets/frontend/default/css/spacing.css'
+import '../../public/assets/frontend/default/css/styles7839.css?v=1.2'
+
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",

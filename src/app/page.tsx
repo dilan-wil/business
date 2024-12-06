@@ -23,6 +23,7 @@ export default function Home() {
             <div className='circle'></div>
         </div>
     </div>
+    
     {/* Area start Section */}
     <Area />
     
