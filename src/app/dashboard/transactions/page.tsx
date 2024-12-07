@@ -1,3 +1,4 @@
+'use client'
 import { TransactionHistory } from "@/components/transactions-history";
 import { useAuth } from "@/components/context/auth-context";
 import { useEffect } from "react";

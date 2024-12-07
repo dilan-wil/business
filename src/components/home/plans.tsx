@@ -1,62 +1,86 @@
+import { getACollection } from "@/functions/get-a-collection";
+import { getADocument } from "@/functions/get-a-document";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { BuyPlan } from "../buyPlan";
 
-export function Plans() {
-    const plans = [
-        {
-            name: "Minage-A",
-            price: 2100,
-            daily: 350,
-            total: 1050
-        },
-        {
-            name: "Minage-B",
-            price: 6000,
-            daily: 1000,
-            total: 30000
-        },
-        {
-            name: "Minage-C",
-            price: 12000,
-            daily: 2000,
-            total: 60000
-        },
-        {
-            name: "Minage-D",
-            price: 21000,
-            daily: 3500,
-            total: 105000
-        },
-        {
-            name: "Minage-E",
-            price: 60000,
-            daily: 10000,
-            total: 300000
-        },
-        {
-            name: "Minage-F",
-            price: 120000,
-            daily: 20000,
-            total: 600000
-        },
-        {
-            name: "Minage-G",
-            price: 240000,
-            daily: 40000,
-            total: 1200000
-        },
-        {
-            name: "Minage-H",
-            price: 420000,
-            daily: 70000,
-            total: 2100000
-        },
-        {
-            name: "Minage-I",
-            price: 780000,
-            daily: 130000,
-            total: 3900000
-        },
-    ]
+export function Plans({type} : {type: string}) {
+    const [plans, setPlans] = useState<{id: string, name: string, price: number, daily: number, total: number}[]>([])
+    // const plans = [
+    //     {
+    //         name: "Minage-A",
+    //         price: 2100,
+    //         daily: 350,
+    //         total: 1050
+    //     },
+    //     {
+    //         name: "Minage-B",
+    //         price: 6000,
+    //         daily: 1000,
+    //         total: 30000
+    //     },
+    //     {
+    //         name: "Minage-C",
+    //         price: 12000,
+    //         daily: 2000,
+    //         total: 60000
+    //     },
+    //     {
+    //         name: "Minage-D",
+    //         price: 21000,
+    //         daily: 3500,
+    //         total: 105000
+    //     },
+    //     {
+    //         name: "Minage-E",
+    //         price: 60000,
+    //         daily: 10000,
+    //         total: 300000
+    //     },
+    //     {
+    //         name: "Minage-F",
+    //         price: 120000,
+    //         daily: 20000,
+    //         total: 600000
+    //     },
+    //     {
+    //         name: "Minage-G",
+    //         price: 240000,
+    //         daily: 40000,
+    //         total: 1200000
+    //     },
+    //     {
+    //         name: "Minage-H",
+    //         price: 420000,
+    //         daily: 70000,
+    //         total: 2100000
+    //     },
+    //     {
+    //         name: "Minage-I",
+    //         price: 780000,
+    //         daily: 130000,
+    //         total: 3900000
+    //     },
+    // ]
+
+    useEffect(() => {
+        const getPlans = async () => {
+            const allPlans = await getACollection("plans");
+    
+            // Ensure the structure matches the expected shape
+            const transformedPlans = allPlans.map((plan: any) => ({
+                id: plan.id,
+                name: plan.name || "Default Name", // Provide default values if necessary
+                price: plan.price || 0,
+                daily: plan.daily || 0,
+                total: plan.total || 0,
+            }));
+    
+            setPlans(transformedPlans);
+        };
+    
+        getPlans();
+    }, []);
 
     return (
         <section className="subscriptions-section section-space">
@@ -83,12 +107,15 @@ export function Plans() {
                                 <p className="description">Plan de Minage</p>
                                 <div className="price-value">
                                     <strong>FCFA {plan.price}</strong>
-                                    <sub>/ 30 jours</sub>
+                                    <sub>/ 70 jours</sub>
                                 </div>
                                 <div className="price-btn">
-                                    <Link className="site-btn w-100" href="login">
-                                        Commencer
-                                    </Link>
+                                    {type=="home"  
+                                    ?    <Link className="site-btn w-100" href="login">
+                                            Commencer
+                                        </Link>
+                                    : <BuyPlan {...plan}/>
+                                    }
                                 </div>
                                 <div className="price-list">
                                     <ul className="icon-list">
@@ -139,7 +166,7 @@ export function Plans() {
                                                         strokeLinecap="round" strokeLinejoin="round" />
                                                 </svg>
                                             </span>
-                                            <p className="list-item-text">Période: 30 jours</p>
+                                            <p className="list-item-text">Période: 70 jours</p>
                                         </li>
                                         <li>
                                             <span className="list-item-icon">

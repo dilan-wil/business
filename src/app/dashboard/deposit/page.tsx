@@ -17,7 +17,7 @@ export default function Page() {
         number: "695028300",
       },
       mtn: {
-        name: "Ngeumo Teddy",
+        name: "Antoine Ndzengue",
         number: "680894121",
       },
     };
@@ -33,6 +33,7 @@ export default function Page() {
             return false;
         }
         const added = await addDeposit({userUid: user.uid, amount: amount, transactionId: transactionID, gateway: selectedGateway})
+        console.log(added)
     }
 
   return (

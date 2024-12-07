@@ -1,11 +1,20 @@
 'use client'
+import { askWithdrawal } from "@/functions/ask-withdrawals"
 import { useState } from "react"
-
+import { useAuth } from "@/components/context/auth-context"
 
 export default function Page() {
     const [amount, setAmount] = useState("")
     const [method, setMethod] = useState("")
+    const { user } = useAuth()
 
+    const handleSubmit = async () => {
+        if(!user){
+            return false
+        }
+        const asked = await askWithdrawal(user.uid, method, amount)
+        console.log(asked)
+    }
     return (
         <div className="withdraw-area">
             <div className="site-card-header">
@@ -19,7 +28,7 @@ export default function Page() {
             </div>
             <div className="withdraw-content-wrap">
                 <div className="site-card">
-                    <form >
+                    <form onSubmit={handleSubmit}>
                         <input type="hidden" name="_token" value="yiCHRJxHZDOuoWwuE6UPHG0yf2pESoyufgPZVGPr" />                <div className="row gy-30">
                             <div className="col-xxl-6 col-xl-6 col-lg-6">
                                 <div className="withdraw-form">

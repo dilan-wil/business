@@ -1,7 +1,7 @@
 import { doc, updateDoc, collection, addDoc, getDoc, increment } from "firebase/firestore";
 import { db } from "./firebase"; // Adjust the path to your Firebase configuration
 
-async function askWithdrawal(userId: string, gateway: string, amount: string) {
+export async function askWithdrawal(userId: string, gateway: string, amount: string) {
     try {
         // Validate input
         const newAmount = parseInt(amount)

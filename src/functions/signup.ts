@@ -1,6 +1,6 @@
 import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from "firebase/auth";
 import { auth, db } from "./firebase";
-import { doc, setDoc, serverTimestamp } from "firebase/firestore";
+import { addDoc, collection ,doc, setDoc, serverTimestamp } from "firebase/firestore";
 
 interface FormData {
   email: string;
@@ -10,7 +10,7 @@ interface FormData {
   username: string;
   country: string;
   telephone: string,
-  referral_code?: string 
+  referral_code: string 
 }
 
 export async function signup(formData: FormData) {
@@ -38,6 +38,12 @@ export async function signup(formData: FormData) {
       createdAt: serverTimestamp(),
     });
 
+    await setDoc(doc(db, "users", referral_code, "referrals", user.uid), {
+      uid: user.uid,
+      name: first_name,
+      status: "active"
+    });
+    
     console.log("User signed up and data saved to Firestore.");
     return true;
   } catch (error: any) {
