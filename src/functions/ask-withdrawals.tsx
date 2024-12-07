@@ -1,4 +1,4 @@
-import { doc, updateDoc, collection, addDoc, getDoc, increment } from "firebase/firestore";
+import { doc, updateDoc, collection, addDoc, setDoc, getDoc, increment } from "firebase/firestore";
 import { db } from "./firebase"; // Adjust the path to your Firebase configuration
 
 export async function askWithdrawal(userId: string, gateway: string, amount: string) {
@@ -45,11 +45,11 @@ export async function askWithdrawal(userId: string, gateway: string, amount: str
         });
 
         // Add transaction to user's `transactions` subcollection
-        const transactionsRef = collection(userRef, "transactions");
-        await addDoc(transactionsRef, {
+        await setDoc(doc(db, "users", userId, "transactions", withdrawalDoc.id), {
             description: `Withdrawal to ${gateway}`,
             transactionId: withdrawalDoc.id,
             type: "Withdrawal",
+            user: userId,
             amount: -newAmount,
             charge, // Adjust if there's a charge
             status: "pending",
