@@ -1,3 +1,4 @@
+'use client'
 import { getACollection } from "@/functions/get-a-collection";
 import { getADocument } from "@/functions/get-a-document";
 import Link from "next/link";

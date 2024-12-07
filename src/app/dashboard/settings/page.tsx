@@ -1,3 +1,4 @@
+'use client'
 import { useEffect, useState } from 'react';
 import { useAuth } from '@/components/context/auth-context'; // Adjust the import path as needed
 import { useRouter } from 'next/navigation';
