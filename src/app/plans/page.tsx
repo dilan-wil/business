@@ -47,7 +47,7 @@ export default function Page(){
 
             </main>
 
-            <Plans />
+            <Plans type="home"/>
 
             <Footer />
         </>
