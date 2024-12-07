@@ -51,7 +51,13 @@ const TransactionRow: React.FC<TransactionRowProps> = ({
         <div className={`fw-bold ${charge < 0 ? 'red-color' : 'green-color'}`}>{charge} FCFA</div>
       </div>
       <div className="site-table-col">
-        <div className={`type site-badge ${status === 'pending' ? 'badge-pending' : status === 'failed' ? 'badge-failed' : 'badge-success'}`}>{status}</div>
+        <div
+          className={`type site-badge ${
+            status === 'pending' ? 'badge-pending' : status === 'failed' ? 'badge-failed' : 'badge-success'
+          }`}
+        >
+          {status}
+        </div>
       </div>
       <div className="site-table-col">
         <div className="fw-bold">{method}</div>
@@ -60,42 +66,19 @@ const TransactionRow: React.FC<TransactionRowProps> = ({
   );
 };
 
-export const TransactionHistory: React.FC = () => {
-  const transactions: Transaction[] = [
-    {
-      description: 'Withdraw With Bank Withdrawal-₦',
-      transactionId: 'TRXNFXE9PF83V',
-      type: 'Withdraw',
-      amount: -68000.00,
-      charge: -0,
-      status: 'pending',
-      method: 'Bank Withdrawal',
-      date: '03 Dec 2024 02:41 PM',
-      icon: 'icon-arrange-square',
-    },
-    {
-      description: 'Withdraw With Bank Withdrawal-₦',
-      transactionId: 'TRXMPFPQIGGV2',
-      type: 'Withdraw',
-      amount: -68000.00,
-      charge: -0,
-      status: 'success',
-      method: 'Bank Withdrawal',
-      date: '03 Dec 2024 02:41 PM',
-      icon: 'icon-arrange-square',
-    },
-    {
-      description: 'Withdraw With Bank Withdrawal-₦',
-      transactionId: 'TRXU6KPM6RWO4',
-      type: 'Refund',
-      amount: 68050.00,
-      charge: -0,
-      status: 'failed',
-      method: 'System',
-      date: '03 Dec 2024 09:55 AM',
-      icon: 'icon-money-change',
-    },
-  ];
+interface TransactionHistoryProps {
+  datas: any; // `datas` is of type any, which will be validated as an array.
+  number?: number; // Optional parameter to limit the number of transactions displayed.
+}
+
+export const TransactionHistory: React.FC<TransactionHistoryProps> = ({ datas, number }) => {
+  // Ensure `datas` is an array; otherwise, show an error.
+  if (!Array.isArray(datas)) {
+    return <div>Error: 'datas' must be an array of transactions.</div>;
+  }
+
+  // Limit the transactions based on the `number` parameter.
+  const transactionsToDisplay = number ? datas.slice(0, number) : datas;
 
   return (
     <div className="col-xxl-12 py-9">
@@ -116,7 +99,7 @@ export const TransactionHistory: React.FC = () => {
                   <div className="site-table-col">Statut</div>
                   <div className="site-table-col">Methode</div>
                 </div>
-                {transactions.map((transaction, index) => (
+                {transactionsToDisplay.map((transaction: Transaction, index: number) => (
                   <TransactionRow key={index} {...transaction} />
                 ))}
               </div>

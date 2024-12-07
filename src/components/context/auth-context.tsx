@@ -8,8 +8,12 @@ import { auth } from "@/functions/firebase";
 interface AuthContextType {
   user: User | null;
   loading: boolean;
-  // income: any;  // Add totalIncome here
-  // setIncome: (income: any) => void;  // Add setter for totalIncome
+  userInfo: any;
+  setUserInfo: (userInfo: any) => void;
+  transactions: any;
+  setTransactions: (userTransactions: any) => void;
+  referrals: any;
+  setReferrals: (referrals: any) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -17,7 +21,9 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
-  // const [income, setIncome] = useState<IncomeType | null>(null);  // Initialize totalIncome
+  const [userInfo, setUserInfo] = useState<any | null>(null);  // Initialize totalIncome
+  const [transactions, setTransactions] = useState<any | null>(null);  // Initialize totalIncome
+  const [referrals, setReferrals] = useState<any | null>(null);  // Initialize totalIncome
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -28,7 +34,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, loading }}>
+    <AuthContext.Provider value={{ user, loading, userInfo, transactions, referrals, setUserInfo, setTransactions, setReferrals }}>
       {children}
     </AuthContext.Provider>
   );

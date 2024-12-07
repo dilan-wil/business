@@ -2,17 +2,28 @@
 import { TransactionHistory } from "@/components/transactions-history"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { useAuth } from "@/components/context/auth-context"
+import { useEffect } from "react"
 
 export default function Page(){
     const router = useRouter()
+    const { user, userInfo, transactions, referrals } = useAuth()
+
+    useEffect(() => {
+        if(userInfo && transactions && referrals){
+            console.log(userInfo)
+        }
+    }, [userInfo])
+
+
     return(
         <>
             <div className="row gy-30">
                 <div className="col-xxl-12">
                     <div className="dashboard-card">
                                     <div className="user-profile">
-                                        <span className="info-title">Balance</span>
-                                        <h3 className="number">XAF 67950</h3>
+                                        <span className="info-title">Solde</span>
+                                        <h3 className="number">XAF {userInfo.balance}</h3>
                                         <div className="plan-badge-inner">
                                             <div className="plan-badge">
                                                 <span>
@@ -78,7 +89,7 @@ export default function Page(){
                                                         </defs>
                                                     </svg>
                                                 </span>
-                                                No Plan
+                                                {/* {userInfo} */}
                                             </div>
                                         </div>
                                         <div className="icon">
@@ -121,8 +132,7 @@ export default function Page(){
                                                     className="site-btn primary-btn disable"
                                                     id="copyLinkButton"
                                                     onClick={() => router.push("/dashboard/referral")}><i
-                                                        className="icon-copy"></i>Copy
-                                                    Link</button>
+                                                        className="icon-copy"></i>Copiez le lien</button>
                                                 <button
                                                     className="site-btn primary-btn disable"
                                                     id="shareLinkButton"
@@ -172,7 +182,7 @@ export default function Page(){
                                     </div>
                                     <div className="single-card">
                                         <span className="info-title">Tâches effectués</span>
-                                        <h3 className="number">4</h3>
+                                        <h3 className="number">{userInfo.tasksDone ? userInfo.tasksDone : 0}</h3>
                                         <p className="description">Nombre de Tâches que vous avez effectués</p>
                                         <div className="btn-inner">
                                             <Link className="round-btn"
@@ -211,7 +221,7 @@ export default function Page(){
                                     <div className="single-card">
                                         <span
                                             className="info-title">Transactions</span>
-                                        <h3 className="number">44</h3>
+                                        <h3 className="number">{transactions ? transactions : 0}</h3>
                                         <p className="description">Nombre total de transactions</p>
                                         <div className="btn-inner">
                                             <Link className="round-btn"
@@ -242,7 +252,7 @@ export default function Page(){
                                     </div>
                                     <div className="single-card">
                                         <span className="info-title">Dépot</span>
-                                        <h3 className="number">XAF 0</h3>
+                                        <h3 className="number">XAF {userInfo.deposits ? userInfo.deposits : 0}</h3>
                                         <p className="description">Montant total déposé</p>
                                         <div className="btn-inner">
                                             <Link className="round-btn"
@@ -290,7 +300,7 @@ export default function Page(){
                                     </div>
                                     <div className="single-card">
                                         <span className="info-title">Gains</span>
-                                        <h3 className="number">XAF 68050</h3>
+                                        <h3 className="number">XAF {userInfo.earned ? userInfo.earned : 0}</h3>
                                         <p className="description">Montant total gagné</p>
 
                                         <div className="icon">
@@ -322,7 +332,7 @@ export default function Page(){
                                     </div>
                                     <div className="single-card">
                                         <span className="info-title">Referral</span>
-                                        <h3 className="number">14</h3>
+                                        <h3 className="number">{referrals ? referrals : 0}</h3>
                                         <p className="description">Nombre de personnes parrainés</p>
                                         <div className="btn-inner">
                                             <Link className="round-btn"
@@ -365,7 +375,7 @@ export default function Page(){
                                     </div>
                                     <div className="single-card">
                                         <span className="info-title">Withdraw</span>
-                                        <h3 className="number">XAF 0</h3>
+                                        <h3 className="number">XAF {userInfo.withdrawal ? userInfo.withdrawal : 0}</h3>
                                         <p className="description">Montant totale de retrait</p>
                                         <div className="btn-inner">
                                             <Link className="round-btn"
@@ -411,7 +421,7 @@ export default function Page(){
                                         </div>
                                     </div>
                                 </div>
-                                <TransactionHistory />
+                                <TransactionHistory datas={transactions} number={5}/>
                 <div className="telegram-widget fixed right-0" onClick={() => window.open('https://t.me/', '_blank')}>
                     <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" />
                     Telegram Channel
