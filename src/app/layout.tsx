@@ -49,7 +49,7 @@ export default function RootLayout({
         <meta property="og:image" content="1.jpg" />
         <link
           rel="icon"
-          href="assets/global/images/HXvcMgkWDU3l3zTUsioQ.png"
+          href="assets/icon.png"
           type="image/x-icon"
         />
 

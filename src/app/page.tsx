@@ -25,7 +25,6 @@ export default function Home() {
     </div>
     
     {/* Area start Section */}
-    <Area />
     
     {/* header component */}
     <Header />

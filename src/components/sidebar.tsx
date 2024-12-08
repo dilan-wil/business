@@ -45,12 +45,12 @@ export function Sidebar({ opened, setOpened, referralNumber }: SidebarProps) {
       <div className="sidebar-inner">
         <div className="user-sidebar">
           <div className="site-logo">
-            <a href="https://paytimecash.9r3.site/dashboard" className="logo">
+            <Link href="/dashboard" className="logo">
               <img
-                src="https://paytimecash.9r3.site/assets/global/images/Yo4YjHser8wVk1yKs5Ds.png"
+                src="assets/logo.png"
                 alt="PayTime Cash"
               />
-            </a>
+            </Link>
             <div onClick={() => setOpened(!opened)} className="back-btn">
               <i className="fa fa-angle-left"></i>
             </div>

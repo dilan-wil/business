@@ -11,9 +11,9 @@ export function Footer() {
                     <div className="col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6">
                         <div className="footer-widget-1-1">
                             <div className="footer-logo">
-                                <a href="index.html">
-                                    <img src="assets/global/images/Yo4YjHser8wVk1yKs5Ds.png" alt="logo not found" />
-                                </a>
+                                <Link href="/">
+                                    <img src="assets/logo.png" alt="logo" />
+                                </Link>
                             </div>
                             <div className="footer-content">
                                 <p className="description">Gagnez des commissions en invitant vos amis et en accomplisant des taches.</p>

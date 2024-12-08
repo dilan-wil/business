@@ -13,8 +13,8 @@ export function Header() {
                 <div className="offcanvas-content">
                     <div className="offcanvas-top d-flex justify-content-between align-items-center">
                         <div className="offcanvas-logo">
-                            <Link href="">
-                                {/* <img src="assets/global/images/Yo4YjHser8wVk1yKs5Ds.png" alt="logo not found" /> */}
+                            <Link href="/">
+                                <img src="assets/logo.png" alt="logo" />
                             </Link>
                         </div>
                         <div className="offcanvas-close">
@@ -49,8 +49,8 @@ export function Header() {
         <div className="container">
             <div className="header-inner">
                 <div className="header-logo">
-                    <Link className="logo-white" href="index.html"><img src="assets/global/images/Yo4YjHser8wVk1yKs5Ds.png" alt="Logo not found" /></Link>
-                    <Link className="logo-black" href="index.html"><img src="assets/global/images/Yo4YjHser8wVk1yKs5Ds.png" alt="Logo not found" /></Link>
+                    <Link className="logo-white" href="index.html"><img src="assets/logo.png" alt="Logo" /></Link>
+                    <Link className="logo-black" href="index.html"><img src="assets/logo.png" alt="Logo" /></Link>
                 </div>
                 <div className="header-menu d-none d-xl-inline-flex">
                     <nav className="td-main-menu" id="mobile-menu">
