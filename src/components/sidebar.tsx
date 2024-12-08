@@ -3,7 +3,7 @@ import Link from "next/link";
 import { AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader, AlertDialogFooter, AlertDialogCancel, AlertDialogAction } from "@/components/ui/alert-dialog";
 import { auth } from "@/functions/firebase";
 import { signOut } from "firebase/auth";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 interface SidebarProps {
   opened: boolean;
