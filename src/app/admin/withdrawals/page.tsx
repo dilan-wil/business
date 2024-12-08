@@ -40,13 +40,15 @@ const WithdrawalPage = () => {
       <h1>Withdrawal</h1>
       <ul>
         {withdrawals.map((w: any) => (
-          <li key={w.id}>
-            <p>{`UserId: ${w.userId}, Gateway: ${w.gateway}, Amount: ${w.amount}, Charge: ${w.charge}, Status: ${w.status}, Date: ${w.date}`}</p>
-            {w.status === 'pending' && (
-              <button onClick={() => handleUpdateStatus(w)}>Mark as Success</button>
-            )}
-          </li>
-          {(index < (withdrawals.length - 1)) && <hr />}
+          <div key={w.id}>
+            <li >
+              <p>{`UserId: ${w.userId}, Gateway: ${w.gateway}, Amount: ${w.amount}, Charge: ${w.charge}, Status: ${w.status}, Date: ${w.date}`}</p>
+              {w.status === 'pending' && (
+                <button onClick={() => handleUpdateStatus(w)}>Mark as Success</button>
+              )}
+            </li>
+            <hr />
+          </div>
         ))}
       </ul>
     </div>
