@@ -17,7 +17,7 @@ export function Header() {
                                 <img src="assets/logo.png" alt="logo" />
                             </Link>
                         </div>
-                        <div className="offcanvas-close">
+                        <div onClick={() => setOpened(false)} className="offcanvas-close">
                             <button className="offcanvas-close-icon animation--flip">
                                 <span className="offcanvas-m-lines">
                                     <span className="offcanvas-m-line line--1"></span><span
