@@ -431,10 +431,6 @@ export default function Page(){
                     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
                     WhatsApp Channel
                 </div>
-                <div className="youtube-widget" onClick={() => window.open('https://youtube.com/', '_blank')}>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" alt="Youtube" />
-                    Youtube Channel
-                </div>
                 </div>
             </div>
         </>

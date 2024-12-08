@@ -16,10 +16,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
   // This useEffect will fetch and set the income as soon as the user is authenticated
   
-  React.useEffect(() => {
-    const isMobile = window.innerWidth < 768;
-    setOpened(!isMobile)
-  })
+  // React.useEffect(() => {
+  //   const isMobile = window.innerWidth < 768;
+  //   setOpened(!isMobile)
+  // })
 
   React.useEffect(() => {
     if (!user) {
