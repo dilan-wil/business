@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect } from "react";
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc, addDoc, collection } from "firebase/firestore";
 import { db } from "@/functions/firebase"; // Firebase initialized here
 import { useAuth } from "@/components/context/auth-context"; // Provides `userInfo`
 import Link from "next/link";
@@ -17,7 +17,7 @@ type Plan = {
   };
 
 export default function Page() {
-  const { userInfo, setUserInfo } = useAuth();
+  const { userInfo, setUserInfo, setTransactions } = useAuth();
   const [loading, setLoading] = useState(false);
 
   const handleTaskClick = async (plan: Plan) => {
@@ -41,10 +41,10 @@ export default function Page() {
     setLoading(true);
 
     try {
-      const userDocRef = doc(db, "users", userInfo.uid);
+      const userDocRef = doc(db, "users", userInfo?.uid);
 
       // Update the clicked plan
-      const updatedPlans = userInfo.plans.map((p: Plan) =>
+      const updatedPlans = userInfo?.plans.map((p: Plan) =>
         p.id === plan.id
           ? {
               ...p,
@@ -54,7 +54,7 @@ export default function Page() {
           : p
       );
 
-      const newBalance = userInfo.balance + plan.daily;
+      const newBalance = userInfo?.balance + plan.daily;
 
       // Update Firestore with new plans data and balance
       await updateDoc(userDocRef, {
@@ -62,12 +62,29 @@ export default function Page() {
         balance: newBalance,
       });
 
+      const transactionsCollectionRef = collection(userDocRef, "transactions");
+      const newTransaction = {
+        description: `Gain ${plan.times - 70} du plan ${plan.name}`,
+        transactionId: plan.name,
+        type: "Taches",
+        amount: plan.daily,
+        charge: 0,
+        status: "success",
+        method: "system",
+        date: new Date().toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" }),
+        icon: "icon-money-change",
+      };
+
+      await addDoc(transactionsCollectionRef, newTransaction);
+
       // Update local state
       setUserInfo({
         ...userInfo,
         plans: updatedPlans,
         balance: newBalance,
       });
+      // Update transactions by appending the new transaction
+      setTransactions((prevTransactions: any) => [...prevTransactions, newTransaction]);
 
       alert("Tâche effectuée avec succès!");
     } catch (error) {
@@ -98,7 +115,7 @@ export default function Page() {
             </div>
             <div className="ads-item-inner">
               <div className="row">
-                {userInfo.plans.map((plan: Plan) => (
+                {userInfo?.plans.map((plan: Plan) => (
                   <div key={plan.id} className="ads-single-item">
                     <div className="content-inner">
                       <div className="contents">

@@ -10,7 +10,7 @@ import { getASubCollection } from "@/functions/get-a-sub-collection"
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const { user, setUserInfo, setTransactions, setReferrals } = useAuth()
-  
+    const [referralNumber, setReferralNumber] = React.useState(0)
     const [opened, setOpened] = React.useState(true)
     const currentDate = new Date()
 
@@ -20,11 +20,14 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       console.error("User is not authenticated")
       return
     }
+    const getUserInfo = async() => {
+      const uuser = await getADocument(user.uid, "users")
+      console.log(uuser)
+      setUserInfo(uuser)
+    }
 
+    getUserInfo()
     // Set up real-time listener to fetch income data and update context
-    const uuser = getADocument(user.uid, "users")
-
-    setUserInfo(uuser)
     
   }, [user, setUserInfo])
   React.useEffect(() => {
@@ -32,10 +35,14 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       console.error("User is not authenticated")
       return
     }
-
+    const getUserTransactions = async () => {
+      const transac = await getASubCollection("users", user.uid, "transactions")
+      console.log(transac)
+  
+      setTransactions(transac)
+    }
+    getUserTransactions()
     // Set up real-time listener to fetch income data and update context
-    const transac = getASubCollection("users", user.uid, "transactions")
-    setTransactions(transac)
     // // Cleanup listener on component unmount
     // return () => unsubscribe && unsubscribe()
   }, [user, setTransactions])
@@ -44,10 +51,14 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       console.error("User is not authenticated")
       return
     }
-
+    const getUserReferrals = async () => {
+      const ref = await getASubCollection("users", user.uid, "referrals")
+      console.log(ref)
+      setReferralNumber(ref.length)
+      setReferrals(ref)
+    }
+    getUserReferrals()
     // Set up real-time listener to fetch income data and update context
-    const ref = getASubCollection("users", user.uid, "referrals")
-    setReferrals(ref)
     // // Cleanup listener on component unmount
     // return () => unsubscribe && unsubscribe()
   }, [user, setReferrals])
@@ -70,7 +81,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         <div className="page-wrapper null compact-wrapper">
             <Navbar opened={opened} setOpened={setOpened} />
             <div className="page-body-wrapper">
-                <Sidebar setOpened={setOpened} opened={opened}/>
+                <Sidebar referralNumber={referralNumber} setOpened={setOpened} opened={opened}/>
 		        <div className="page-body">
 			        <div className="container-fluid default-page">
                         <div className="">

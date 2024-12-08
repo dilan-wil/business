@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [userInfo, setUserInfo] = useState<any | null>(null);  // Initialize totalIncome
-  const [transactions, setTransactions] = useState<any | null>(null);  // Initialize totalIncome
+  const [transactions, setTransactions] = useState<any | null>([]);  // Initialize totalIncome
   const [referrals, setReferrals] = useState<any | null>(null);  // Initialize totalIncome
 
   useEffect(() => {

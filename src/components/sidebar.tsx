@@ -2,7 +2,8 @@ import Link from "next/link";
 
 interface SidebarProps {
     opened: boolean;
-    setOpened: (value: boolean) => void
+    setOpened: (value: boolean) => void;
+    referralNumber: number
   }
   
   const sidebarLinks = [
@@ -18,7 +19,7 @@ interface SidebarProps {
     { href: '/dashboard/settings', icon: 'icon-setting-2', label: 'Paramètres' }
   ];
   
-  export function Sidebar({ opened, setOpened }: SidebarProps) {
+  export function Sidebar({ opened, setOpened, referralNumber }: SidebarProps) {
     return (
         <div className={`sidebar-wrapper ${opened ? '' : 'close_icon'} ${!opened ? 'sm:close_icon' : ''}`}>
           <div className="sidebar-inner">
@@ -43,7 +44,7 @@ interface SidebarProps {
                       <Link href={href}>
                         <i className={icon}></i>
                         <span>{label}</span>
-                        {count && <b className="count-number">{count}</b>}
+                        {count && <b className="count-number">{referralNumber}</b>}
                       </Link>
                     </li>
                   ))}

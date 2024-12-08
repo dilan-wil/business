@@ -1,12 +1,13 @@
 'use client'
-import { useRouter } from "next/router";
-import { doc, updateDoc, arrayUnion } from "firebase/firestore";
+import { useRouter } from "next/navigation";
+import { doc, updateDoc, arrayUnion, addDoc, collection } from "firebase/firestore";
 import { db } from "@/functions/firebase";
 import { AlertDialog, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogAction, AlertDialogCancel } from "@/components/ui/alert-dialog";
 import { useState } from "react";
 import { useAuth } from "./context/auth-context";
 import { Loader2 } from "lucide-react";
 import addReferralBonus from "@/functions/add-referral-bonus";
+import Loader from "./loader";
 
 type Plan = {
   id: string;
@@ -20,7 +21,7 @@ export const BuyPlan = ({ id, name, price, daily, total }: Plan) => {
   const router = useRouter();
   const [isDialogOpen, setDialogOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
-  const { userInfo, setUserInfo } = useAuth();
+  const { userInfo, setUserInfo, setTransactions } = useAuth();
   const [loading, setLoading] = useState(false)
 
   const handleBuyClick = (plan: Plan) => {
@@ -53,8 +54,24 @@ export const BuyPlan = ({ id, name, price, daily, total }: Plan) => {
         }),
       });
 
-      setUserInfo({ ...userInfo, balance: newBalance });
+      const transactionsCollectionRef = collection(userDocRef, "transactions");
+      const newTransaction = {
+        description: `Achat du plan ${selectedPlan.name}`,
+        transactionId: selectedPlan.name,
+        type: "Achat",
+        amount: -selectedPlan.price,
+        charge: 0,
+        status: "success",
+        method: "system",
+        date: new Date().toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" }),
+        icon: "icon-money-change",
+      }
 
+      await addDoc(transactionsCollectionRef, newTransaction);
+
+      setUserInfo({ ...userInfo, balance: newBalance });
+      // Update transactions by appending the new transaction
+      setTransactions((prevTransactions: any) => [...prevTransactions, newTransaction]);
       await addReferralBonus(userInfo.referredBy, selectedPlan.price)
 
       alert("Plan acheté avec succès!");
@@ -69,6 +86,7 @@ export const BuyPlan = ({ id, name, price, daily, total }: Plan) => {
 
   return (
     <>
+    {loading && <Loader />}
       <button onClick={() => handleBuyClick({ id, name, price, daily, total })} className="site-btn w-100">
         Acheter
       </button>

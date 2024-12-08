@@ -6,9 +6,12 @@ interface AddDepositInput {
   amount: string;
   transactionId: string;
   gateway: string;
+  userINFO: any;
+  setUserINFO: any;
+  setTransac: any;
 }
 
-export async function addDeposit({ userUid, amount, transactionId, gateway }: AddDepositInput): Promise<boolean> {
+export async function addDeposit({ userUid, amount, transactionId, gateway, userINFO, setUserINFO, setTransac }: AddDepositInput): Promise<boolean> {
   try {
     // Reference to the deposit document in the "deposits" collection
     const depositDocRef = doc(db, "deposits", transactionId);
@@ -39,6 +42,9 @@ export async function addDeposit({ userUid, amount, transactionId, gateway }: Ad
       balance: increment(newAmount),
       deposits: increment(newAmount)
     });
+    const incrementBalance = userINFO.balance + newAmount
+    const incrementDeposits = userINFO.deposits + newAmount
+    setUserINFO({...userINFO, balance: incrementBalance, deposits: incrementDeposits})
 
     // Mark the deposit as redeemed
     await updateDoc(depositDocRef, {
@@ -47,7 +53,7 @@ export async function addDeposit({ userUid, amount, transactionId, gateway }: Ad
 
     // Add a new transaction record to the user's "transactions" sub-collection
     const transactionsCollectionRef = collection(userDocRef, "transactions");
-    await addDoc(transactionsCollectionRef, {
+    const newTransaction = {
       description: `Deposit via ${gateway}`,
       transactionId,
       type: "Deposit",
@@ -57,7 +63,10 @@ export async function addDeposit({ userUid, amount, transactionId, gateway }: Ad
       method: gateway,
       date: new Date().toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" }),
       icon: "icon-money-change",
-    });
+    }
+
+    await addDoc(transactionsCollectionRef, newTransaction);
+    setTransac((prevTransactions: any) => [...prevTransactions, newTransaction]);
 
     console.log("Deposit redeemed successfully and transaction recorded.");
     return true;

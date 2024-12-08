@@ -12,8 +12,9 @@ export default function Page(){
     useEffect(() => {
         if(userInfo && transactions && referrals){
             console.log(userInfo)
+            console.log(transactions)
         }
-    }, [userInfo])
+    }, [userInfo, transactions])
 
 
     return(
@@ -23,7 +24,7 @@ export default function Page(){
                     <div className="dashboard-card">
                                     <div className="user-profile">
                                         <span className="info-title">Solde</span>
-                                        <h3 className="number">XAF {userInfo.balance}</h3>
+                                        <h3 className="number">XAF {userInfo?.balance ?? 0}</h3>
                                         <div className="plan-badge-inner">
                                             <div className="plan-badge">
                                                 <span>
@@ -182,7 +183,7 @@ export default function Page(){
                                     </div>
                                     <div className="single-card">
                                         <span className="info-title">Tâches effectués</span>
-                                        <h3 className="number">{userInfo.tasksDone ? userInfo.tasksDone : 0}</h3>
+                                        <h3 className="number">{userInfo?.tasksDone ? userInfo?.tasksDone : 0}</h3>
                                         <p className="description">Nombre de Tâches que vous avez effectués</p>
                                         <div className="btn-inner">
                                             <Link className="round-btn"
@@ -221,7 +222,7 @@ export default function Page(){
                                     <div className="single-card">
                                         <span
                                             className="info-title">Transactions</span>
-                                        <h3 className="number">{transactions ? transactions : 0}</h3>
+                                        <h3 className="number">{transactions ? transactions.length : 0}</h3>
                                         <p className="description">Nombre total de transactions</p>
                                         <div className="btn-inner">
                                             <Link className="round-btn"
@@ -252,7 +253,7 @@ export default function Page(){
                                     </div>
                                     <div className="single-card">
                                         <span className="info-title">Dépot</span>
-                                        <h3 className="number">XAF {userInfo.deposits ? userInfo.deposits : 0}</h3>
+                                        <h3 className="number">XAF {userInfo?.deposits ? userInfo?.deposits : 0}</h3>
                                         <p className="description">Montant total déposé</p>
                                         <div className="btn-inner">
                                             <Link className="round-btn"
@@ -300,7 +301,7 @@ export default function Page(){
                                     </div>
                                     <div className="single-card">
                                         <span className="info-title">Gains</span>
-                                        <h3 className="number">XAF {userInfo.earned ? userInfo.earned : 0}</h3>
+                                        <h3 className="number">XAF {userInfo?.earned ? userInfo?.earned : 0}</h3>
                                         <p className="description">Montant total gagné</p>
 
                                         <div className="icon">
@@ -332,7 +333,7 @@ export default function Page(){
                                     </div>
                                     <div className="single-card">
                                         <span className="info-title">Referral</span>
-                                        <h3 className="number">{referrals ? referrals : 0}</h3>
+                                        <h3 className="number">{referrals ? referrals.length : 0}</h3>
                                         <p className="description">Nombre de personnes parrainés</p>
                                         <div className="btn-inner">
                                             <Link className="round-btn"
@@ -375,7 +376,7 @@ export default function Page(){
                                     </div>
                                     <div className="single-card">
                                         <span className="info-title">Withdraw</span>
-                                        <h3 className="number">XAF {userInfo.withdrawal ? userInfo.withdrawal : 0}</h3>
+                                        <h3 className="number">XAF {userInfo?.withdrawals ? userInfo?.withdrawals : 0}</h3>
                                         <p className="description">Montant totale de retrait</p>
                                         <div className="btn-inner">
                                             <Link className="round-btn"

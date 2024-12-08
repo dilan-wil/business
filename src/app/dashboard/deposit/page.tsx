@@ -2,12 +2,15 @@
 import { useAuth } from "@/components/context/auth-context";
 import React, { useState } from "react";
 import { addDeposit } from "@/functions/add-deposit";
+import Link from "next/link";
+import Loader from "@/components/loader";
 
 export default function Page() {
-    const { user } = useAuth()
+    const { user, userInfo, setTransactions, setUserInfo } = useAuth()
     const [selectedGateway, setSelectedGateway] = useState<"orange" | "mtn" | "">("");
     const [amount, setAmount] = useState("0");
     const [transactionID, setTransactionID] = useState("");
+    const [loading, setLoading] = useState(false);
 
 
     // Gateway details
@@ -28,31 +31,44 @@ export default function Page() {
       setSelectedGateway(value);
     };
 
-    const handleAddMoney = async () => {
+    const handleAddMoney = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
         if(!user){
             return false;
         }
-        const added = await addDeposit({userUid: user.uid, amount: amount, transactionId: transactionID, gateway: selectedGateway})
-        console.log(added)
+        try {
+          setLoading(true)
+          const added = await addDeposit({userUid: user.uid, amount: amount, transactionId: transactionID, gateway: selectedGateway, userINFO: userInfo, setUserINFO: setUserInfo, setTransac: setTransactions})
+          console.log(added)
+          alert("Votre dépot a été effectué")
+        } catch {
+          alert("rassurez vous que vous entrez le bon montant et la bonne clé de transaction-")
+        } finally {
+          setLoading(false)
+          setTransactionID("")
+          setAmount("0")
+          setSelectedGateway("")
+        }
     }
 
   return (
     <div className="add-found-area">
-      <form action="https://paytimecash.9r3.site/user/deposit/now" method="post">
+      {loading && <Loader />}
+      <form onSubmit={handleAddMoney}>
         <input type="hidden" name="_token" value="yiCHRJxHZDOuoWwuE6UPHG0yf2pESoyufgPZVGPr" />
         <div className="row gy-30">
-          <div className="col-xxl-6 col-xl-6">
+          <div className="col-xxl-6 col-xl-6"> 
             <div className="add-fund-box">
               <div className="site-card">
                 <div className="site-card-header">
                   <div className="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-3">
                     <h3 className="site-card-title mb-0">Faire un Dépôt</h3>
-                    <a
+                    <Link
                       className="site-btn primary-btn"
-                      href="https://paytimecash.9r3.site/user/deposit/log"
+                      href="/dashboard/transactions"
                     >
                       <i className="icon-receipt-item"></i>Historique
-                    </a>
+                    </Link>
                   </div>
                 </div>
                 <div className="add-found-wrapper">
@@ -88,7 +104,7 @@ export default function Page() {
                             />
                             <div className="add-gateway-thumb">
                               <img
-                                src="MobileMoney.jpg"
+                                src="./MobileMoney.jpg"
                                 alt="MTN Mobile Money"
                               />
                               <span>MTN Mobile Money</span>

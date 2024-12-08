@@ -66,20 +66,28 @@ export function Plans({type} : {type: string}) {
 
     useEffect(() => {
         const getPlans = async () => {
-            const allPlans = await getACollection("plans");
-    
-            // Ensure the structure matches the expected shape
-            const transformedPlans = allPlans.map((plan: any) => ({
-                id: plan.id,
-                name: plan.name || "Default Name", // Provide default values if necessary
-                price: plan.price || 0,
-                daily: plan.daily || 0,
-                total: plan.total || 0,
-            }));
-    
-            setPlans(transformedPlans);
+            try {
+                const allPlans = await getACollection("plans");
+
+                // Ensure the structure matches the expected shape
+                const transformedPlans = allPlans.map((plan: any) => ({
+                    id: plan.id,
+                    name: plan.name || "Default Name", // Provide default values if necessary
+                    price: plan.price || 0,
+                    daily: plan.daily || 0,
+                    total: plan.total || 0,
+                }));
+
+                // Sort the plans by price in ascending order
+                transformedPlans.sort((a, b) => a.price - b.price);
+
+                // Set the sorted plans
+                setPlans(transformedPlans);
+            } catch (error) {
+                console.error("Failed to fetch or process plans:", error);
+            }
         };
-    
+
         getPlans();
     }, []);
 

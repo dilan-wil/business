@@ -17,7 +17,7 @@ export function About() {
                     <div className="card-two">
                     </div>
                     <div className="establish-shape">
-                        <h3>Début en novembre 2024</h3>
+                        <h3>08 Décembre 2024</h3>
                     </div>
                 </div>
             </div>

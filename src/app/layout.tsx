@@ -53,7 +53,7 @@ export default function RootLayout({
         />
 
         {/* Page Title */}
-        <title>PayTime Cash - Home</title>
+        <title>Bitcoin Works</title>
 
         {/* CSS Stylesheets */}
         {[
