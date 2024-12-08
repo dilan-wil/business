@@ -11,7 +11,7 @@ import { getASubCollection } from "@/functions/get-a-sub-collection"
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const { user, setUserInfo, setTransactions, setReferrals } = useAuth()
     const [referralNumber, setReferralNumber] = React.useState(0)
-    const [opened, setOpened] = React.useState(true)
+    const [opened, setOpened] = React.useState(false)
     const currentDate = new Date()
 
   // This useEffect will fetch and set the income as soon as the user is authenticated
