@@ -42,7 +42,7 @@ export async function askWithdrawal(userId: string, gateway: string, amount: str
         // Decrement user's balance
         await updateDoc(userRef, {
             balance: increment(-newAmount),
-            withdrawaks: increment(newAmount)
+            withdrawals: increment(newAmount)
         });
 
         const incrementBalance = userInfo.balance - newAmount
