@@ -15,6 +15,12 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     const currentDate = new Date()
 
   // This useEffect will fetch and set the income as soon as the user is authenticated
+  
+  React.useEffect(() => {
+    const isMobile = window.innerWidth < 768;
+    setOpened(!isMobile)
+  })
+
   React.useEffect(() => {
     if (!user) {
       console.error("User is not authenticated")

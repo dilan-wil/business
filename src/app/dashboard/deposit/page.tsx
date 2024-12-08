@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { addDeposit } from "@/functions/add-deposit";
 import Link from "next/link";
 import Loader from "@/components/loader";
+import Image from "next/image";
 
 export default function Page() {
     const { user, userInfo, setTransactions, setUserInfo } = useAuth()
@@ -86,7 +87,7 @@ export default function Page() {
                               onChange={handleGatewayChange}
                             />
                             <div className="add-gateway-thumb">
-                              <img
+                              <Image
                                 src="orange-money.png"
                                 alt="Orange Money"
                               />
@@ -103,8 +104,8 @@ export default function Page() {
                               onChange={handleGatewayChange}
                             />
                             <div className="add-gateway-thumb">
-                              <img
-                                src="./MobileMoney.jpg"
+                              <Image
+                                src="MobileMoney.jpg"
                                 alt="MTN Mobile Money"
                               />
                               <span>MTN Mobile Money</span>
