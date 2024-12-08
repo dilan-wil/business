@@ -46,6 +46,7 @@ const WithdrawalPage = () => {
               <button onClick={() => handleUpdateStatus(w)}>Mark as Success</button>
             )}
           </li>
+          {(index < (withdrawals.length - 1)) && <hr />}
         ))}
       </ul>
     </div>

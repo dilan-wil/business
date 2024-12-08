@@ -1,6 +1,6 @@
 
 
-export function Navbar({ opened, setOpened }: { opened: boolean, setOpened: (value: boolean) => void }) {
+export function Navbar({ opened, setOpened, userInfo }: { opened: boolean, setOpened: (value: boolean) => void, userInfo: any }) {
     return (
         <>
             <div className={`page-header ${opened ? '' : 'close_icon'}`}>
@@ -23,7 +23,7 @@ export function Navbar({ opened, setOpened }: { opened: boolean, setOpened: (val
                                                 <img src="https://paytimecash.9r3.site/assets/frontend/images/user.jpg" alt="Nuadje Dilan" />
                                             </div>
                                             <div className="content">
-                                                <h4 className="title">Nuadje Dilan</h4>
+                                                <h4 className="title">{userInfo.first_name} {userInfo.last_name}</h4>
                                             </div>
                                         </div>
                                         <div className="info-list">

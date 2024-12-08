@@ -1,7 +1,7 @@
 import { doc, updateDoc, collection, addDoc, setDoc, getDoc, increment } from "firebase/firestore";
 import { db } from "./firebase"; // Adjust the path to your Firebase configuration
 
-export async function askWithdrawal(userId: string, gateway: string, amount: string, userInfo: any, setUserInfo: any, setTransactions: any) {
+export async function askWithdrawal(userId: string, gateway: string, amount: string, numero: string, userInfo: any, setUserInfo: any, setTransactions: any) {
     try {
         // Validate input
         const newAmount = parseInt(amount)
@@ -32,9 +32,12 @@ export async function askWithdrawal(userId: string, gateway: string, amount: str
         const withdrawalRef = collection(db, "withdrawals");
         const withdrawalDoc = await addDoc(withdrawalRef, {
             userId,
+            name: userInfo.first_name,
             gateway,
             amount: newAmount,
             charge,
+            numero,
+            a_envoyer: newAmount-charge,
             status: "pending",
             date: new Date().toISOString(),
         });

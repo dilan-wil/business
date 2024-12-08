@@ -23,6 +23,7 @@ export const BuyPlan = ({ id, name, price, daily, total }: Plan) => {
   const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
   const { userInfo, setUserInfo, setTransactions } = useAuth();
   const [loading, setLoading] = useState(false)
+  const now = new Date();
 
   const handleBuyClick = (plan: Plan) => {
     setSelectedPlan(plan);
@@ -51,6 +52,7 @@ export const BuyPlan = ({ id, name, price, daily, total }: Plan) => {
           daily: selectedPlan.daily,
           purchaseDate: new Date().toISOString(),
           times: 70,
+          lastClicked: now.toISOString()
         }),
       });
 

@@ -130,6 +130,9 @@ export default function Page() {
                             <p>
                               <b>ACCOUNT NUMBER: {gatewayDetails[selectedGateway].number}</b>
                             </p>
+                            <p>
+                              Veuillez éffectuer un dépot à ce numero. Une fois le dépot éffectué entrez le montant et l'id de transaction
+                            </p>
                           </div>
                         </div>
                       </div>
@@ -155,7 +158,7 @@ export default function Page() {
                     <label className="input-label">
                       Entrez le code de transaction unique<span className="text text-danger">*</span>{" "}
                     </label>
-                    <input type="text" onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTransactionID(event.target.value)} name="proof" id="proof" />
+                    <input type="text" onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTransactionID(event.target.value)} name="proof" id="proof" required/>
                     <button type="button" className="upload-thumb-close">
                       <i className="icon-close-circle"></i>
                     </button>

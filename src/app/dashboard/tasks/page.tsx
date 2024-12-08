@@ -7,14 +7,14 @@ import Link from "next/link";
 import { Loader2 } from "lucide-react";
 
 type Plan = {
-    id: string;
-    name: string;
-    price: string;
-    daily: number;
-    times: number;
-    purchaseDate: string;
-    lastClicked?: string; // ISO date string
-  };
+  id: string;
+  name: string;
+  price: string;
+  daily: number;
+  times: number;
+  purchaseDate: string;
+  lastClicked?: string; // ISO date string
+};
 
 export default function Page() {
   const { userInfo, setUserInfo, setTransactions } = useAuth();
@@ -47,10 +47,10 @@ export default function Page() {
       const updatedPlans = userInfo?.plans.map((p: Plan) =>
         p.id === plan.id
           ? {
-              ...p,
-              times: p.times - 1,
-              lastClicked: now.toISOString(),
-            }
+            ...p,
+            times: p.times - 1,
+            lastClicked: now.toISOString(),
+          }
           : p
       );
 
@@ -123,7 +123,15 @@ export default function Page() {
                         <span className="rounded-pill badge">Plan</span>
                         <p className="description">Durée: 3 Secondes</p>
                         <p>Restant: {plan.times} fois</p>
-                        <h4 className="currency">XAF{plan.daily}</h4>
+                        <p>
+                          Dernier clique:{" "}
+                          {plan.lastClicked
+                            ? new Intl.DateTimeFormat("fr-FR", {
+                              dateStyle: "medium",
+                              timeStyle: "short",
+                            }).format(new Date(plan.lastClicked))
+                            : "Aucun clic précédent"}
+                        </p>                        <h4 className="currency">XAF{plan.daily}</h4>
                       </div>
                       <div className="btn-wrap">
                         <button

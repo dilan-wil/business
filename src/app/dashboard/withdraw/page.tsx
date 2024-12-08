@@ -3,26 +3,50 @@ import { askWithdrawal } from "@/functions/ask-withdrawals"
 import { useState } from "react"
 import { useAuth } from "@/components/context/auth-context"
 import Loader from "@/components/loader"
+import { useToast } from "@/hooks/use-toast"
 
 export default function Page() {
     const [amount, setAmount] = useState("")
     const [method, setMethod] = useState("")
     const [numero, setNumero] = useState("")
+    const [nom, setNom] = useState("")
     const [loading, setLoading] = useState(false)
     const { user, userInfo, setUserInfo, setTransactions } = useAuth()
+    const { toast } = useToast()
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if(!user){
             return false
         }
+        const now = new Date();
+        const currentHour = now.getUTCHours() + 1; // Adjust to GMT+1
+        const currentMinutes = now.getUTCMinutes();
+    
+        // Check if the time is outside 9 AM to 7 PM
+        if (currentHour < 9 || (currentHour === 19 && currentMinutes > 0) || currentHour > 19) {
+            toast({
+                variant: "destructive",
+                title: "Heure de Retrait.",
+                description: "Les demandes de retrait se font exclusvivement entre 9h et 19h.",
+              })
+            return false;
+        }
         try {
             setLoading(true)
-            const asked = await askWithdrawal(user.uid, method, amount, userInfo, setUserInfo, setTransactions)
+            const asked = await askWithdrawal(user.uid, method, amount, numero, userInfo, setUserInfo, setTransactions)
             console.log(asked)
-            alert("Votre requete a été envoyée. Vous recevrez vos fond dans un délai de 24h")
+            toast({
+                variant: "success",
+                title: "Demande de retrait réussi.",
+                description: "Votre requete a été envoyée. Vous recevrez vos fond dans un délai de 24h.",
+              })
         } catch {
-            alert("Vérifiez aue vous entrez les bonnes informations et recommencé")
+            toast({
+                variant: "destructive",
+                title: "Erreur de retrait.",
+                description: "Rassurez vous d'avoir les fonds nécessaires et d'entrer les bonnes informations.",
+              })
         } finally {
             setLoading(false)
             setAmount("")
@@ -62,7 +86,7 @@ export default function Page() {
                                     <div className="single-input has-right-icon">
                                         <label className="input-label" >Montant</label>
                                         <div className="input-field">
-                                            <input onChange={(event: React.ChangeEvent<HTMLInputElement>) => setAmount(event.target.value)} type="text" name="amount" className="box-input" />
+                                            <input onChange={(event: React.ChangeEvent<HTMLInputElement>) => setAmount(event.target.value)} type="text" name="amount" className="box-input" required/>
                                             <span className="icon">
                                                 <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M1 10.7177C1 12.2227 2.155 13.436 3.59 13.436H6.51833C7.76667 13.436 8.78167 12.3743 8.78167 11.0677C8.78167 9.64435 8.16333 9.14268 7.24167 8.81602L2.54 7.18268C1.61833 6.85602 1 6.35435 1 4.93102C1 3.62435 2.015 2.56268 3.26333 2.56268H6.19167C7.62667 2.56268 8.78167 3.77602 8.78167 5.28102" stroke="#5C5958" strokeWidth="1.5" strokeLinejoin="round" strokeLinecap="round"></path>
@@ -75,7 +99,20 @@ export default function Page() {
                                     <div className="single-input has-right-icon">
                                         <label className="input-label" >Numero</label>
                                         <div className="input-field">
-                                            <input onChange={(event: React.ChangeEvent<HTMLInputElement>) => setNumero(event.target.value)} type="text" name="amount" className="box-input" />
+                                            <input onChange={(event: React.ChangeEvent<HTMLInputElement>) => setNumero(event.target.value)} type="text" name="amount" className="box-input" required/>
+                                            <span className="icon">
+                                                <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M1 10.7177C1 12.2227 2.155 13.436 3.59 13.436H6.51833C7.76667 13.436 8.78167 12.3743 8.78167 11.0677C8.78167 9.64435 8.16333 9.14268 7.24167 8.81602L2.54 7.18268C1.61833 6.85602 1 6.35435 1 4.93102C1 3.62435 2.015 2.56268 3.26333 2.56268H6.19167C7.62667 2.56268 8.78167 3.77602 8.78167 5.28102" stroke="#5C5958" strokeWidth="1.5" strokeLinejoin="round" strokeLinecap="round"></path>
+                                                    <path d="M4.88281 1V15" stroke="#5C5958" strokeWidth="1.5" strokeLinejoin="round" strokeLinecap="round"></path>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <div className="text-danger range mt-2"></div>
+                                    </div>
+                                    <div className="single-input has-right-icon">
+                                        <label className="input-label" >Nom</label>
+                                        <div className="input-field">
+                                            <input onChange={(event: React.ChangeEvent<HTMLInputElement>) => setNom(event.target.value)} type="text" name="amount" className="box-input" required/>
                                             <span className="icon">
                                                 <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M1 10.7177C1 12.2227 2.155 13.436 3.59 13.436H6.51833C7.76667 13.436 8.78167 12.3743 8.78167 11.0677C8.78167 9.64435 8.16333 9.14268 7.24167 8.81602L2.54 7.18268C1.61833 6.85602 1 6.35435 1 4.93102C1 3.62435 2.015 2.56268 3.26333 2.56268H6.19167C7.62667 2.56268 8.78167 3.77602 8.78167 5.28102" stroke="#5C5958" strokeWidth="1.5" strokeLinejoin="round" strokeLinecap="round"></path>
@@ -97,7 +134,7 @@ export default function Page() {
                                                 <span className="info amount">{amount}</span>
                                             </li>
                                             <li>
-                                                <span className="info">Commissions:</span>
+                                                <span className="info">Commissions(10%):</span>
                                                 <span className="info charge">{parseInt(amount)*0.1}</span>
                                             </li>
                                             <li>
@@ -108,6 +145,12 @@ export default function Page() {
                                                 <span className="info">Numero du compte:</span>
                                                 <span className="info method">
                                                     {numero}
+                                                </span>
+                                            </li>
+                                            <li>
+                                                <span className="info">Nom du compte:</span>
+                                                <span className="info method">
+                                                    {nom}
                                                 </span>
                                             </li>
                                             <li>

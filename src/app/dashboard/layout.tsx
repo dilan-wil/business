@@ -9,7 +9,7 @@ import { getADocument } from "@/functions/get-a-document"
 import { getASubCollection } from "@/functions/get-a-sub-collection"
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
-  const { user, setUserInfo, setTransactions, setReferrals } = useAuth()
+  const { user, userInfo,setUserInfo, setTransactions, setReferrals } = useAuth()
     const [referralNumber, setReferralNumber] = React.useState(0)
     const [opened, setOpened] = React.useState(false)
     const currentDate = new Date()
@@ -26,6 +26,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       console.error("User is not authenticated")
       return
     }
+
     const getUserInfo = async() => {
       const uuser = await getADocument(user.uid, "users")
       console.log(uuser)
@@ -36,6 +37,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     // Set up real-time listener to fetch income data and update context
     
   }, [user, setUserInfo])
+
   React.useEffect(() => {
     if (!user) {
       console.error("User is not authenticated")
@@ -85,7 +87,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   return (
     <ProtectedRoute>
         <div className="page-wrapper null compact-wrapper">
-            <Navbar opened={opened} setOpened={setOpened} />
+            <Navbar opened={opened} setOpened={setOpened} userInfo={userInfo}/>
             <div className="page-body-wrapper">
                 <Sidebar referralNumber={referralNumber} setOpened={setOpened} opened={opened}/>
 		        <div className="page-body">
