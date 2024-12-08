@@ -4,10 +4,12 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { signup } from "@/functions/signup";
 import Loader from "@/components/loader";
+import { useToast } from "@/hooks/use-toast";
 
 export default function Page(){
 
     const router = useRouter();
+    const { toast } = useToast()
     const [loading, setLoading] = useState(false)
     const [formData, setFormData] = useState({
         first_name: '',
@@ -97,8 +99,18 @@ export default function Page(){
         console.log(signUp)
         if(signUp === true){
             setLoading(false)
+            toast({
+                variant: "success",
+                title: "Inscription Réussi.",
+                description: "Vous avez été inscrit. Vous serez diriger vers votre pannel.",
+            })
             router.push('/dashboard')
         }else {
+            toast({
+                variant: "destructive",
+                title: "Erreur lors de l'inscription.",
+                description: "Il se pourrait que vous n'ayez pas bien rempli vos informations ou cette utilisateur existe déjà.",
+            })
             console.log(signUp)
         }
         setLoading(false)

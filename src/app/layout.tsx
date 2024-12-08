@@ -11,6 +11,7 @@ import '../../public/assets/frontend/default/css/select2.min.css'
 import '../../public/assets/frontend/default/css/iconsax.css'
 import '../../public/assets/frontend/default/css/spacing.css'
 import '../../public/assets/frontend/default/css/styles7839.css?v=1.2'
+import { Toaster } from "@/components/ui/toaster";
 
 
 const geistSans = localFont({
@@ -112,7 +113,7 @@ export default function RootLayout({
       </head>
       <body className="landing-page-bg">
         <AuthProvider>{children}</AuthProvider>
-
+            <Toaster />
         {/* JavaScript */}
         {[
           "jquery-3.7.1.min.js",

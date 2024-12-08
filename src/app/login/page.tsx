@@ -4,13 +4,14 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { login } from "@/functions/login";
 import Loader from "@/components/loader";
+import { useToast } from "@/hooks/use-toast";
 
 export default function Page(){
 
     const router = useRouter()
 
     const [loading, setLoading] = useState(false)
-
+    const { toast } = useToast()
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -64,12 +65,27 @@ export default function Page(){
             console.log("Login Successful:", loginSuccessful);
             
             if (loginSuccessful) {
+                toast({
+                    variant: "success",
+                    title: "Connexion Réussi.",
+                    description: "Vous serez diriger vers votre pannel.",
+                })
                 router.push('/dashboard');
             } else {
                 console.error("Login failed");
+                toast({
+                    variant: "destructive",
+                    title: "Mauvais email ou mot de passe.",
+                    description: "Rassurez vous d'entrer la bonne adresse mail et le bon mot de passe.",
+                  })
             }
         } catch (error) {
             console.error("Error during login:", error);
+            toast({
+                variant: "destructive",
+                title: "Mauvais email ou mot de passe.",
+                description: "Rassurez vous d'entrer la bonne adresse mail et le bon mot de passe.",
+              })
         } finally {
             setLoading(false);
         }
