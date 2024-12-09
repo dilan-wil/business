@@ -34,28 +34,53 @@ export default function Page() {
     };
 
     const handleAddMoney = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        if(!user){
-            return false;
-        }
-        try {
-          setLoading(true)
-          const added = await addDeposit({userUid: user.uid, amount: amount, transactionId: transactionID, gateway: selectedGateway, userINFO: userInfo, setUserINFO: setUserInfo, setTransac: setTransactions})
-          console.log(added)
+      e.preventDefault();
+      if (!user) {
+        return false;
+      }
+      try {
+        setLoading(true);
+        const added = await addDeposit({
+          userUid: user.uid,
+          amount: amount,
+          transactionId: transactionID,
+          gateway: selectedGateway,
+          userINFO: userInfo,
+          setUserINFO: setUserInfo,
+          setTransac: setTransactions,
+        });
+        console.log(added);
+        toast({
+          variant: "success",
+          title: "En attente d'approbation.",
+          description:
+            "Votre demande de dépôt est en attente d'approbation. Un administrateur se chargera de l'accepter.",
+        });
+      } catch (error: any) {
+        if (error.message === "This deposit request has already been processed.") {
+          // Specific toast for duplicate transaction error
           toast({
-            variant: "success",
-            title: "En attendant d'approbation.",
-            description: "Votre de demande de dépot est en attente d'approbation, un administrateur se charger de l'accepter.",
-          })
-        } catch {
-          alert("rassurez vous que vous entrez le bon montant et la bonne clé de transaction-")
-        } finally {
-          setLoading(false)
-          setTransactionID("")
-          setAmount("0")
-          setSelectedGateway("")
+            variant: "destructive",
+            title: "Erreur de transaction",
+            description: "Cette demande de dépôt a déjà été traitée.",
+          });
+        } else {
+          // Generic toast for other errors
+          toast({
+            variant: "destructive",
+            title: "Erreur",
+            description:
+              "Rassurez-vous que vous avez entré le bon montant et la bonne clé de transaction.",
+          });
         }
-    }
+      } finally {
+        setLoading(false);
+        setTransactionID("");
+        setAmount("0");
+        setSelectedGateway("");
+      }
+    };
+    
 
   return (
     <div className="add-found-area">
