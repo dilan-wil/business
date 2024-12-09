@@ -9,6 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 export default function Page(){
 
     const router = useRouter()
+    const [visible, setVisible] = useState(false)
 
     const [loading, setLoading] = useState(false)
     const { toast } = useToast()
@@ -117,8 +118,8 @@ export default function Page(){
                             <div className="single-input has-right-icon has-left-icon">
                                 <label className="input-label">Password<span className="text-danger">*</span></label>
                                 <div className="input-field">
-                                    <input onChange={handleChange} type="password" className="box-input password-input" name="password" required />
-                                    <div className="password">
+                                    <input onChange={handleChange} type={visible ? "text" : "password"} className="box-input password-input" name="password" required />
+                                    <div onClick={() => setVisible(!visible)} className="password">
                                         <img src="assets/frontend/default/images/icons/eye-off.svg" className="password-hide-show eyeicon" alt="" />
                                     </div>
                                     <span className="icon">

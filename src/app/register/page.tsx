@@ -5,13 +5,13 @@ import { useEffect, useState } from "react";
 import { signup } from "@/functions/signup";
 import Loader from "@/components/loader";
 import { useToast } from "@/hooks/use-toast";
-import { useRouter as useLegacyRouter } from "next/router";
+import { useSearchParams } from "next/navigation";
 
 export default function Page() {
 
     const router = useRouter();
-    const routerLink = useLegacyRouter();
-    const { invite } = routerLink.query;
+    const searchParams = useSearchParams();
+    const invite = searchParams.get("invite");
     const { toast } = useToast()
     const [loading, setLoading] = useState(false)
     const [visible, setVisible] = useState(false)
@@ -90,6 +90,7 @@ export default function Page() {
 
     // Check validity whenever formData or errors change
     useEffect(() => {
+        console.log(invite)
         const allFieldsFilled = Object.values(formData).every(field => field !== '')
         const noErrors = Object.values(errors).every(error => error === '')
         setIsValid(allFieldsFilled && noErrors)

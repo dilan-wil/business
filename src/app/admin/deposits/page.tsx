@@ -61,7 +61,7 @@ const AdminDepositPage = () => {
       <ul>
         {deposits.map((deposit) => (
           <li key={deposit.id}>
-            <p>ID: {deposit.id}</p>
+            <p>ID de transaction: {deposit.id}</p>
             <p>Amount: {deposit.amount}</p>
             <p>User ID: {deposit.userUid}</p>
             <button onClick={() => approveDeposit(deposit.id, deposit.userUid, deposit.amount)}>

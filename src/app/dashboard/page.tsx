@@ -220,38 +220,6 @@ export default function Page(){
                                         </div>
                                     </div>
                                     <div className="single-card">
-                                        <span
-                                            className="info-title">Transactions</span>
-                                        <h3 className="number">{transactions ? transactions.length : 0}</h3>
-                                        <p className="description">Nombre total de transactions</p>
-                                        <div className="btn-inner">
-                                            <Link className="round-btn"
-                                                href="/dashboard/transactions"><span><i
-                                                        className="fa-sharp fa-regular fa-arrow-up-long"></i></span></Link>
-                                        </div>
-                                        <div className="icon">
-                                            <span>
-                                                <svg width="28" height="28"
-                                                    viewBox="0 0 28 28"
-                                                    fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M26.5 12.85V14C26.4985 16.6955 25.6256 19.3184 24.0117 21.4773C22.3977 23.6362 20.1291 25.2156 17.5442 25.9799C14.9593 26.7442 12.1966 26.6524 9.66809 25.7182C7.1396 24.7841 4.98082 23.0576 3.5137 20.7963C2.04658 18.5351 1.34974 15.8601 1.5271 13.1704C1.70445 10.4807 2.74651 7.92042 4.49785 5.87135C6.24919 3.82229 8.61598 2.39424 11.2452 1.8002C13.8745 1.20615 16.6253 1.47793 19.0875 2.57501"
-                                                        stroke="#29B475"
-                                                        strokeWidth="2.5"
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"></path>
-                                                    <path
-                                                        d="M26.5 4L14 16.5125L10.25 12.7625"
-                                                        stroke="#29B475"
-                                                        strokeWidth="2.5"
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"></path>
-                                                </svg>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div className="single-card">
                                         <span className="info-title">Dépot</span>
                                         <h3 className="number">XAF {userInfo?.deposits ? userInfo?.deposits : 0}</h3>
                                         <p className="description">Montant total déposé</p>
@@ -423,13 +391,13 @@ export default function Page(){
                                     </div>
                                 </div>
                                 <TransactionHistory datas={transactions} number={5}/>
-                <div className="telegram-widget fixed right-0" onClick={() => window.open('https://t.me/', '_blank')}>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" />
-                    Telegram Channel
+                <div className="whatsapp-widget right-0" onClick={() => window.open('https://wa.me/+33753601846', '_blank')}>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="Telegram" />
+                    Groupe Whatsapp
                 </div>
-                <div className="whatsapp-widget" onClick={() => window.open('https://whatsapp.com/', '_blank')}>
+                <div className="whatsapp-widget" onClick={() => window.open('https://chat.whatsapp.com/LnVFtbUjGx6EcKa4kAda1o', '_blank')}>
                     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
-                    WhatsApp Channel
+                    Service client
                 </div>
                 </div>
             </div>
