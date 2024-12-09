@@ -8,6 +8,7 @@ import { useAuth } from "./context/auth-context";
 import { Loader2 } from "lucide-react";
 import addReferralBonus from "@/functions/add-referral-bonus";
 import Loader from "./loader";
+import { useToast } from "@/hooks/use-toast";
 
 type Plan = {
   id: string;
@@ -19,6 +20,7 @@ type Plan = {
 
 export const BuyPlan = ({ id, name, price, daily, total }: Plan) => {
   const router = useRouter();
+  const { toast } = useToast()
   const [isDialogOpen, setDialogOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
   const { userInfo, setUserInfo, setTransactions } = useAuth();
@@ -35,6 +37,11 @@ export const BuyPlan = ({ id, name, price, daily, total }: Plan) => {
     if (!userInfo?.uid || !selectedPlan) return;
 
     if (userInfo.balance < selectedPlan.price) {
+      toast({
+        variant: "destructive",
+        title: "Solde Insuffisant.",
+        description: "VRechargez votre compte pour payer ce plan.",
+      })
       router.push("/dashboard/deposit");
       return;
     }
@@ -78,7 +85,11 @@ export const BuyPlan = ({ id, name, price, daily, total }: Plan) => {
       setTransactions((prevTransactions: any) => [...prevTransactions, newTransaction]);
       await addReferralBonus(userInfo.referredBy, selectedPlan.price)
 
-      alert("Plan acheté avec succès!");
+      toast({
+        variant: "success",
+        title: "Achat Réussi.",
+        description: "Votre plan a été ajouté. Rendez-vous dans la section taches pour éfféctuer vos taches.",
+      })
     } catch (error) {
       console.error("Error purchasing plan: ", error);
       alert("Recommencer s'ils vous plait.");
