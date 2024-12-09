@@ -80,17 +80,20 @@ const AdminDepositPage = () => {
       <h1>Admin Deposit Approvals</h1>
       <ul>
         {deposits.map((deposit) => (
-          <li key={deposit.id}>
-            <p>ID de transaction: {deposit.id}</p>
-            <p>Amount: {deposit.amount}</p>
-            <p>User ID: {deposit.userUid}</p>
-            <button onClick={() => approveDeposit(deposit.id, deposit.userUid, deposit.amount)}>
-              Approve
-            </button>
-            <button onClick={() => refuseDeposit(deposit.id, deposit.userUid)}>
-              Refuse
-            </button>
-          </li>
+          <>
+            <li key={deposit.id}>
+              <p>ID de transaction: {deposit.id}</p>
+              <p>Amount: {deposit.amount}</p>
+              <p>User ID: {deposit.userUid}</p>
+              <button onClick={() => approveDeposit(deposit.id, deposit.userUid, deposit.amount)}>
+                Approve
+              </button>
+              <button onClick={() => refuseDeposit(deposit.id, deposit.userUid)}>
+                Refuse
+              </button>
+            </li>
+              <hr />
+          </>
         ))}
       </ul>
     </div>
