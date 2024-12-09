@@ -181,38 +181,33 @@ export default function Page(){
                                         </div>
 
                                     </div>
+                                    
                                     <div className="single-card">
-                                        <span className="info-title">Tâches effectués</span>
-                                        <h3 className="number">{userInfo?.tasksDone ? userInfo?.tasksDone : 0}</h3>
-                                        <p className="description">Nombre de Tâches que vous avez effectués</p>
+                                        <span
+                                            className="info-title">Transactions</span>
+                                        <h3 className="number">{transactions ? transactions.length : 0}</h3>
+                                        <p className="description">Nombre total de transactions</p>
                                         <div className="btn-inner">
                                             <Link className="round-btn"
-                                                href="https://paytimecash.9r3.site/user/earnings"><span><i
+                                                href="/dashboard/transactions"><span><i
                                                         className="fa-sharp fa-regular fa-arrow-up-long"></i></span></Link>
                                         </div>
                                         <div className="icon">
                                             <span>
-                                                <svg width="30" height="30"
-                                                    viewBox="0 0 30 30"
+                                                <svg width="28" height="28"
+                                                    viewBox="0 0 28 28"
                                                     fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
-                                                        d="M22.5 23.575H21.55C20.55 23.575 19.6 23.9625 18.9 24.6625L16.7625 26.775C15.7875 27.7375 14.2 27.7375 13.225 26.775L11.0875 24.6625C10.3875 23.9625 9.425 23.575 8.4375 23.575H7.5C5.425 23.575 3.75 21.9125 3.75 19.8625V6.2125C3.75 4.1625 5.425 2.5 7.5 2.5H22.5C24.575 2.5 26.25 4.1625 26.25 6.2125V19.85C26.25 21.9 24.575 23.575 22.5 23.575Z"
-                                                        stroke="#02BAD8"
-                                                        strokeWidth="2.25"
-                                                        strokeMiterlimit="10"
+                                                        d="M26.5 12.85V14C26.4985 16.6955 25.6256 19.3184 24.0117 21.4773C22.3977 23.6362 20.1291 25.2156 17.5442 25.9799C14.9593 26.7442 12.1966 26.6524 9.66809 25.7182C7.1396 24.7841 4.98082 23.0576 3.5137 20.7963C2.04658 18.5351 1.34974 15.8601 1.5271 13.1704C1.70445 10.4807 2.74651 7.92042 4.49785 5.87135C6.24919 3.82229 8.61598 2.39424 11.2452 1.8002C13.8745 1.20615 16.6253 1.47793 19.0875 2.57501"
+                                                        stroke="#29B475"
+                                                        strokeWidth="2.5"
                                                         strokeLinecap="round"
                                                         strokeLinejoin="round"></path>
                                                     <path
-                                                        d="M15.0883 11.1875C15.0383 11.1875 14.9633 11.1875 14.9008 11.1875C13.5883 11.1375 12.5508 10.075 12.5508 8.75C12.5508 7.4 13.6383 6.3125 14.9883 6.3125C16.3383 6.3125 17.4258 7.4125 17.4258 8.75C17.4383 10.075 16.4008 11.15 15.0883 11.1875Z"
-                                                        stroke="#02BAD8"
-                                                        strokeWidth="2.25"
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"></path>
-                                                    <path
-                                                        d="M11.5633 14.95C9.90078 16.0625 9.90078 17.875 11.5633 18.9875C13.4508 20.25 16.5508 20.25 18.4383 18.9875C20.1008 17.875 20.1008 16.0625 18.4383 14.95C16.5508 13.7 13.4633 13.7 11.5633 14.95Z"
-                                                        stroke="#02BAD8"
-                                                        strokeWidth="2.25"
+                                                        d="M26.5 4L14 16.5125L10.25 12.7625"
+                                                        stroke="#29B475"
+                                                        strokeWidth="2.5"
                                                         strokeLinecap="round"
                                                         strokeLinejoin="round"></path>
                                                 </svg>
