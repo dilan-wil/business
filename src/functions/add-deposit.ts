@@ -1,5 +1,5 @@
 import { db } from "./firebase"; // Adjust the import to match your Firebase setup
-import { doc, getDoc, collection, addDoc, updateDoc, increment } from "firebase/firestore";
+import { doc, getDoc, setDoc,collection, addDoc, updateDoc, increment } from "firebase/firestore";
 
 interface AddDepositInput {
   userUid: string;
@@ -11,67 +11,51 @@ interface AddDepositInput {
   setTransac: any;
 }
 
-export async function addDeposit({ userUid, amount, transactionId, gateway, userINFO, setUserINFO, setTransac }: AddDepositInput): Promise<boolean> {
+export async function addDeposit({
+  userUid,
+  amount,
+  transactionId,
+  gateway,
+  userINFO,
+  setUserINFO,
+  setTransac,
+}: AddDepositInput): Promise<boolean> {
   try {
-    // Reference to the deposit document in the "deposits" collection
-    const depositDocRef = doc(db, "deposits", transactionId);
-    const depositDocSnap = await getDoc(depositDocRef);
-    const newAmount = parseInt(amount)
+    const newAmount = parseInt(amount);
 
-    if (!depositDocSnap.exists()) {
-      console.error("Transaction ID not found in deposits.");
-      throw new Error("Transaction ID does not exist.");
-    }
+    // Add deposit to the "deposits" collection with "pending" status
+    const depositData = {
+      userUid,
+      transactionId,
+      amount: newAmount,
+      gateway,
+      status: "pending", // Mark as pending for admin approval
+      date: new Date().toISOString(),
+    };
 
-    const depositData = depositDocSnap.data();
-    if (depositData?.status === "redeemed") {
-      console.error("This transaction has already been redeemed.");
-      throw new Error("Transaction already redeemed.");
-    }
+    await setDoc(doc(db, "deposits", transactionId), depositData);
 
-    if (depositData?.amount !== amount) {
-      console.error("Transaction amount does not match.");
-      throw new Error("Invalid transaction amount.");
-    }
-
-    // Proceed with redemption
+    // Create a pending transaction in the user's "transactions" sub-collection using transactionId as document ID
     const userDocRef = doc(db, "users", userUid);
-
-    // Increment user balance
-    await updateDoc(userDocRef, {
-      balance: increment(newAmount),
-      deposits: increment(newAmount)
-    });
-    const incrementBalance = userINFO.balance + newAmount
-    const incrementDeposits = userINFO.deposits + newAmount
-    setUserINFO({...userINFO, balance: incrementBalance, deposits: incrementDeposits})
-
-    // Mark the deposit as redeemed
-    await updateDoc(depositDocRef, {
-      status: "redeemed",
-    });
-
-    // Add a new transaction record to the user's "transactions" sub-collection
-    const transactionsCollectionRef = collection(userDocRef, "transactions");
-    const newTransaction = {
+    const transactionData = {
       description: `Deposit via ${gateway}`,
       transactionId,
       type: "Deposit",
       amount: newAmount,
       charge: 0,
-      status: "success",
+      status: "pending", // Initially pending
       method: gateway,
       date: new Date().toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" }),
       icon: "icon-money-change",
-    }
+    };
 
-    await addDoc(transactionsCollectionRef, newTransaction);
-    setTransac((prevTransactions: any) => [...prevTransactions, newTransaction]);
+    await setDoc(doc(collection(userDocRef, "transactions"), transactionId), transactionData);
+    setTransac((prevTransactions: any) => [...prevTransactions, transactionData]);
 
-    console.log("Deposit redeemed successfully and transaction recorded.");
+    console.log("Deposit and pending transaction added.");
     return true;
   } catch (error) {
-    console.error("Error processing deposit:", error);
+    console.error("Error adding deposit:", error);
     throw error;
   }
 }

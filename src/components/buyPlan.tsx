@@ -43,17 +43,19 @@ export const BuyPlan = ({ id, name, price, daily, total }: Plan) => {
       const userDocRef = doc(db, "users", userInfo.uid);
       const newBalance = userInfo.balance - selectedPlan.price;
 
+      const newPlan = {
+        id: selectedPlan.id,
+        name: selectedPlan.name,
+        price: selectedPlan.price,
+        daily: selectedPlan.daily,
+        purchaseDate: new Date().toISOString(),
+        times: 70,
+        lastClicked: now.toISOString(),
+      };
+
       await updateDoc(userDocRef, {
         balance: newBalance,
-        plans: arrayUnion({
-          id: selectedPlan.id,
-          name: selectedPlan.name,
-          price: selectedPlan.price,
-          daily: selectedPlan.daily,
-          purchaseDate: new Date().toISOString(),
-          times: 70,
-          lastClicked: now.toISOString()
-        }),
+        plans: arrayUnion(newPlan),
       });
 
       const transactionsCollectionRef = collection(userDocRef, "transactions");
@@ -71,7 +73,7 @@ export const BuyPlan = ({ id, name, price, daily, total }: Plan) => {
 
       await addDoc(transactionsCollectionRef, newTransaction);
 
-      setUserInfo({ ...userInfo, balance: newBalance });
+      setUserInfo({ ...userInfo, balance: newBalance,plans: [...(userInfo?.plans || []), newPlan], });
       // Update transactions by appending the new transaction
       setTransactions((prevTransactions: any) => [...prevTransactions, newTransaction]);
       await addReferralBonus(userInfo.referredBy, selectedPlan.price)
