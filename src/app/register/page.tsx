@@ -23,7 +23,7 @@ function SignUp() {
         username: '',
         telephone: '',
         country: 'cm',
-        referral_code: 'none'
+        referral_code: invite ? invite : "none"
     })
 
     const [errors, setErrors] = useState({
