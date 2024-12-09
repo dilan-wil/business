@@ -5,6 +5,7 @@ import { addDeposit } from "@/functions/add-deposit";
 import Link from "next/link";
 import Loader from "@/components/loader";
 import Image from "next/image";
+import { useToast } from "@/hooks/use-toast";
 
 export default function Page() {
     const { user, userInfo, setTransactions, setUserInfo } = useAuth()
@@ -12,7 +13,7 @@ export default function Page() {
     const [amount, setAmount] = useState("0");
     const [transactionID, setTransactionID] = useState("");
     const [loading, setLoading] = useState(false);
-
+    const { toast } = useToast()
 
     // Gateway details
     const gatewayDetails: Record<"orange" | "mtn", { name: string; number: string }> = {
@@ -41,7 +42,11 @@ export default function Page() {
           setLoading(true)
           const added = await addDeposit({userUid: user.uid, amount: amount, transactionId: transactionID, gateway: selectedGateway, userINFO: userInfo, setUserINFO: setUserInfo, setTransac: setTransactions})
           console.log(added)
-          alert("Votre dépot a été effectué")
+          toast({
+            variant: "success",
+            title: "En attendant d'approbation.",
+            description: "Votre de demande de dépot est en attente d'approbation, un administrateur se charger de l'accepter.",
+          })
         } catch {
           alert("rassurez vous que vous entrez le bon montant et la bonne clé de transaction-")
         } finally {
@@ -145,6 +150,7 @@ export default function Page() {
                             type="number"
                             name="montant"
                             id="montant"
+                            value={amount}
                             placeholder="Entrez le montant"
                             onChange={(event: React.ChangeEvent<HTMLInputElement>) => setAmount(event.target.value)}
                             required
@@ -158,7 +164,7 @@ export default function Page() {
                     <label className="input-label">
                       Entrez le code de transaction unique<span className="text text-danger">*</span>{" "}
                     </label>
-                    <input type="text" onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTransactionID(event.target.value)} name="proof" id="proof" required/>
+                    <input type="text" value={transactionID} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTransactionID(event.target.value)} name="proof" id="proof" required/>
                     <button type="button" className="upload-thumb-close">
                       <i className="icon-close-circle"></i>
                     </button>
@@ -214,7 +220,7 @@ export default function Page() {
         <div className="col-xxl-12">
           <div className="input-btn-wrap">
             <button className="input-btn btn-primary mt-3" type="submit">
-              <i className="icon-arrow-right-2"></i>Proceed to payment
+              <i className="icon-arrow-right-2"></i>Reclamez votre dépot
             </button>
           </div>
         </div>
