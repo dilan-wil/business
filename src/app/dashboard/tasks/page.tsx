@@ -5,6 +5,7 @@ import { db } from "@/functions/firebase"; // Firebase initialized here
 import { useAuth } from "@/components/context/auth-context"; // Provides `userInfo`
 import Link from "next/link";
 import { Loader2 } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 type Plan = {
   id: string;
@@ -19,7 +20,7 @@ type Plan = {
 export default function Page() {
   const { userInfo, setUserInfo, setTransactions } = useAuth();
   const [loading, setLoading] = useState(false);
-
+  const { toast } = useToast()
   const handleTaskClick = async (plan: Plan) => {
     if (loading) return;
 
@@ -28,13 +29,25 @@ export default function Page() {
 
     // Enforce 24-hour cooldown
     if (lastClicked && now.getTime() - lastClicked.getTime() < 24 * 60 * 60 * 1000) {
-      alert("Vous devez attendre 24 heures avant de refaire cette tâche.");
+      const timeLeft = 24 * 60 * 60 * 1000 - (now.getTime() - lastClicked.getTime());
+      const hours = Math.floor(timeLeft / (1000 * 60 * 60));
+      const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+
+      toast({
+        variant: "destructive",
+        title: "24h.",
+        description: `Vous devez attendre encore ${hours} heures et ${minutes} minutes avant de refaire cette tâche.`,
+      })
       return;
     }
 
     // Prevent further clicks if times are exhausted
     if (plan.times <= 0) {
-      alert("Vous avez épuisé le nombre de fois pour cette tâche.");
+      toast({
+        variant: "destructive",
+        title: "Plus de taches.",
+        description: "Vous avez épuisé le nombre de taches pour ce plan.",
+      })
       return;
     }
 
