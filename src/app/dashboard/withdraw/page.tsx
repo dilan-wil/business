@@ -4,6 +4,7 @@ import { useState } from "react"
 import { useAuth } from "@/components/context/auth-context"
 import Loader from "@/components/loader"
 import { useToast } from "@/hooks/use-toast"
+import Link from "next/link"
 
 export default function Page() {
     const [amount, setAmount] = useState("")
@@ -69,8 +70,8 @@ export default function Page() {
                 <div className="site-title-inner">
                     <h3 className="site-card-title mb-0">Faire un Retrait</h3>
                     <div className="d-flex gap-2">
-                        <a className="site-btn primary-btn" href="https://paytimecash.9r3.site/user/withdraw/log" ><i className="icon-receipt-item"></i>Historique</a>
-                        <a className="site-btn primary-btn" href="https://paytimecash.9r3.site/user/withdraw/account"><i className="icon-directbox-send"></i>Compte</a>
+                        <Link className="site-btn primary-btn" href="/dashboard/transactions" ><i className="icon-receipt-item"></i>Historique</Link>
+                        <Link className="site-btn primary-btn" href="/"><i className="icon-directbox-send"></i>Compte</Link>
                     </div>
                 </div>
             </div>
