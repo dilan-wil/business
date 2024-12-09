@@ -63,9 +63,7 @@ function SignUp() {
                 newErrors.email = /\S+@\S+\.\S+/.test(value) ? '' : 'Email is invalid.'
                 break
             case 'password':
-                const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{6,}$/
-                newErrors.password = passwordRegex.test(value) ? '' : 'Password must be at least 6 characters long, contain one uppercase letter, one number, and one special character.'
-                break
+                newErrors.password = value ? '' : 'Password is required.'
             case 'cPassword':
                 newErrors.cPassword = value === formData.password ? '' : 'Passwords do not match.'
                 break
@@ -212,17 +210,7 @@ function SignUp() {
                                                 <i className="icon-lock"></i>
                                             </span>
                                         </div>
-                                        {errors.password && (
-                                            <div style={{ color: 'red' }}>
-                                                <p>Password must:</p>
-                                                <ul>
-                                                    <li>- Be at least 6 characters</li>
-                                                    <li>- Contain at least one uppercase letter</li>
-                                                    <li>- Contain at least one number</li>
-                                                    <li>- Contain at least one special character</li>
-                                                </ul>
-                                            </div>
-                                        )}
+                                        {errors.password && <p style={{ color: 'red' }}>{errors.password}</p>}
                                     </div>
                                     <div className="single-input has-right-icon has-left-icon">
                                         <label className="input-label">Confirmez le mot de passe<span className="text-danger">*</span></label>
