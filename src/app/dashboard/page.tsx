@@ -393,11 +393,11 @@ export default function Page(){
                                 <TransactionHistory datas={transactions} number={5}/>
                 <div className="telegram-widget right-0" onClick={() => window.open('https://wa.me/+33753601846', '_blank')}>
                     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="Telegram" />
-                    Groupe Whatsapp
+                    Service client
                 </div>
                 <div className="whatsapp-widget" onClick={() => window.open('https://chat.whatsapp.com/LnVFtbUjGx6EcKa4kAda1o', '_blank')}>
                     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
-                    Service client
+                    Groupe Whatsapp
                 </div>
                 </div>
             </div>
