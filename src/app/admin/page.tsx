@@ -19,7 +19,7 @@ export default function AdminPage() {
         const allUsers = await getACollection("users");
         const formattedUsers = allUsers.map((user: any) => ({
           id: user.id,
-          name: user.name,
+          name: user.first_name,
           balance: user.balance,
           plans: user.plans,
         }));
