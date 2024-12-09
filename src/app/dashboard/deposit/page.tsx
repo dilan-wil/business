@@ -18,8 +18,8 @@ export default function Page() {
     // Gateway details
     const gatewayDetails: Record<"orange" | "mtn", { name: string; number: string }> = {
       orange: {
-        name: "Teudjeu Marvin",
-        number: "695028300",
+        name: "Noah Mebina",
+        number: "680462509",
       },
       mtn: {
         name: "Antoine Ndzengue",
@@ -120,6 +120,8 @@ export default function Page() {
                               <Image
                                 src="orange-money.png"
                                 alt="Orange Money"
+                                width={50}
+                                height={50}
                               />
                               {/* <span>Orange Money</span> */}
                             </div>
