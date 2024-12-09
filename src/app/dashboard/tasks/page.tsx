@@ -99,7 +99,11 @@ export default function Page() {
       // Update transactions by appending the new transaction
       setTransactions((prevTransactions: any) => [...prevTransactions, newTransaction]);
 
-      alert("Tâche effectuée avec succès!");
+      toast({
+        variant: "success",
+        title: "Taches éffectué avec succès.",
+        description: "Vous avez éffectué votre taches. Vos gains ont été crédités.",
+      });
     } catch (error) {
       console.error("Error completing task:", error);
       alert("Une erreur s'est produite. Veuillez réessayer.");
@@ -150,13 +154,13 @@ export default function Page() {
                         <button
                           className="site-btn"
                           onClick={() => handleTaskClick(plan)}
-                          disabled={
-                            loading ||
-                            plan.times <= 0 ||
-                            (plan.lastClicked &&
-                              (new Date().getTime() - new Date(plan.lastClicked).getTime()) < 24 * 60 * 60 * 1000) ||
-                            plan.lastClicked === ""
-                          }
+                          // disabled={
+                          //   loading ||
+                          //   plan.times <= 0 ||
+                          //   (plan.lastClicked &&
+                          //     (new Date().getTime() - new Date(plan.lastClicked).getTime()) < 24 * 60 * 60 * 1000) ||
+                          //   plan.lastClicked === ""
+                          // }
                         >
                           <i className="icon-eye"></i> {loading ? <Loader2 className="animate-spin" /> : "Effectuez la tâche"}
                         </button>
