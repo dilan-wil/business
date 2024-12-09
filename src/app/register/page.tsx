@@ -1,7 +1,7 @@
 'use client'
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { signup } from "@/functions/signup";
 import Loader from "@/components/loader";
 import { useToast } from "@/hooks/use-toast";
@@ -125,7 +125,7 @@ export default function Page() {
     }
 
     return (
-        <>
+        <Suspense fallback={<Loader />}>
             {loading && <Loader />}
             <section className="sign-up-area">
                 <div className="auth-wrapper">
@@ -266,6 +266,6 @@ export default function Page() {
                 </div>
             </footer>
 
-        </>
+        </Suspense>
     )
 }
