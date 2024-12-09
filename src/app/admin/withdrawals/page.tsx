@@ -11,6 +11,7 @@ const WithdrawalPage = () => {
       gateway?: string;
       amount?: number;
       numero?: number;
+      nom?: string;
       a_envoyer?: number;
       charge?: number;
       status?: string;
@@ -95,6 +96,7 @@ const WithdrawalPage = () => {
                   <tr>
                     <td>Amount: {w.amount}</td>
                     <td>Numero:{w.numero}</td>
+                    <td>Nom: {w.nom}</td>
                   </tr>
                   <tr>
                     <td>Charge: {w.charge}</td>

@@ -35,7 +35,7 @@ export default function Page() {
         }
         try {
             setLoading(true);
-            const asked = await askWithdrawal(user.uid, method, amount, numero, userInfo, setUserInfo, setTransactions);
+            const asked = await askWithdrawal(user.uid, method, amount, numero, nom,userInfo, setUserInfo, setTransactions);
             console.log(asked);
             toast({
                 variant: "success",
