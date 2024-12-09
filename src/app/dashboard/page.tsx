@@ -390,7 +390,7 @@ export default function Page(){
                     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="Telegram" />
                     Service client
                 </div>
-                <div className="whatsapp-widget" onClick={() => window.open('https://chat.whatsapp.com/LnVFtbUjGx6EcKa4kAda1o', '_blank')}>
+                <div className="whatsapp-widget" onClick={() => window.open('https://chat.whatsapp.com/LOrwRxNW6fk7Y7hTo6rPm1', '_blank')}>
                     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
                     Groupe Whatsapp
                 </div>

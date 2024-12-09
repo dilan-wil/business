@@ -5,7 +5,7 @@ import { db } from '@/functions/firebase'; // Import your Firebase instance
 import { updateDoc, doc, collection, getDocs } from 'firebase/firestore';
 
 const WithdrawalPage = () => {
-  const [withdrawals, setWithdrawals] = useState<{ id: string, userId?: string, gateway?: string, amount?: number, charge?: number, status?: string, date?: string }[]>([]);
+  const [withdrawals, setWithdrawals] = useState<{ id: string, userId?: string, gateway?: string, amount?: number, numero?: number,charge?: number, status?: string, date?: string }[]>([]);
 
   useEffect(() => {
     // Fetch withdrawals from Firestore
@@ -42,7 +42,7 @@ const WithdrawalPage = () => {
         {withdrawals.map((w: any) => (
           <div key={w.id}>
             <li >
-              <p>{`UserId: ${w.userId}, Gateway: ${w.gateway}, Amount: ${w.amount}, Charge: ${w.charge}, Status: ${w.status}, Date: ${w.date}`}</p>
+              <p>{`UserId: ${w.userId}, Gateway: ${w.gateway}, Amount: ${w.amount}, Numer: ${w.numero}, Charge: ${w.charge}, Status: ${w.status}, Date: ${w.date}`}</p>
               {w.status === 'pending' && (
                 <button onClick={() => handleUpdateStatus(w)}>Mark as Success</button>
               )}
