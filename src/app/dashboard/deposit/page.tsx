@@ -91,7 +91,7 @@ export default function Page() {
                                 src="orange-money.png"
                                 alt="Orange Money"
                               />
-                              <span>Orange Money</span>
+                              {/* <span>Orange Money</span> */}
                             </div>
                           </label>
 
@@ -108,7 +108,7 @@ export default function Page() {
                                 src="MobileMoney.jpg"
                                 alt="MTN Mobile Money"
                               />
-                              <span>MTN Mobile Money</span>
+                              {/* <span>MTN Mobile Money</span> */}
                             </div>
                           </label>
                         </div>

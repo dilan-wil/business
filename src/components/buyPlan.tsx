@@ -40,7 +40,7 @@ export const BuyPlan = ({ id, name, price, daily, total }: Plan) => {
       toast({
         variant: "destructive",
         title: "Solde Insuffisant.",
-        description: "VRechargez votre compte pour payer ce plan.",
+        description: "Veuillez Rechargez votre compte pour payer ce plan.",
       })
       router.push("/dashboard/deposit");
       return;
