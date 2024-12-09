@@ -6,7 +6,7 @@ import { signup } from "@/functions/signup";
 import Loader from "@/components/loader";
 import { useToast } from "@/hooks/use-toast";
 
-export default function Page() {
+function SignUp() {
 
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -125,7 +125,7 @@ export default function Page() {
     }
 
     return (
-        <Suspense fallback={<Loader />}>
+        <>
             {loading && <Loader />}
             <section className="sign-up-area">
                 <div className="auth-wrapper">
@@ -266,6 +266,14 @@ export default function Page() {
                 </div>
             </footer>
 
+        </>
+    )
+}
+
+export default function Page(){
+    return(   
+        <Suspense>
+            <SignUp />
         </Suspense>
     )
 }
