@@ -110,7 +110,7 @@ const WithdrawalPage = () => {
                 <div>
                   <button onClick={() => handleUpdateStatus(w)}>
                     Mark as Success
-                  </button>
+                  </button>&nbsp;&nbsp;&nbsp;&nbsp;
                   <button onClick={() => handleRefuseStatus(w)}>
                     Refuse
                   </button>

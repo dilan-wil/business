@@ -87,7 +87,7 @@ const AdminDepositPage = () => {
               <p>User ID: {deposit.userUid}</p>
               <button onClick={() => approveDeposit(deposit.id, deposit.userUid, deposit.amount)}>
                 Approve
-              </button>
+              </button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <button onClick={() => refuseDeposit(deposit.id, deposit.userUid)}>
                 Refuse
               </button>
