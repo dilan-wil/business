@@ -391,7 +391,7 @@ export default function Page(){
                                     </div>
                                 </div>
                                 <TransactionHistory datas={transactions} number={5}/>
-                <div className="whatsapp-widget right-0" onClick={() => window.open('https://wa.me/+33753601846', '_blank')}>
+                <div className="telegram-widget right-0" onClick={() => window.open('https://wa.me/+33753601846', '_blank')}>
                     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="Telegram" />
                     Groupe Whatsapp
                 </div>
