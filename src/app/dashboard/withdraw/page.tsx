@@ -17,25 +17,25 @@ export default function Page() {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        if(!user){
+        if (!user) {
             return false
         }
         const now = new Date();
         const currentHour = now.getUTCHours() + 1; // Adjust to GMT+1
         const currentMinutes = now.getUTCMinutes();
-    
+
         // Check if the time is outside 9 AM to 7 PM
-        if (currentHour < 9 || (currentHour === 19 && currentMinutes > 0) || currentHour > 19) {
+        if (currentHour < 9 || (currentHour === 20 && currentMinutes > 0) || currentHour > 20) {
             toast({
                 variant: "destructive",
                 title: "Heure de Retrait.",
-                description: "Les demandes de retrait se font exclusvivement entre 9h et 19h.",
-              })
+                description: "Les demandes de retrait se font exclusvivement entre 9h et 20h.",
+            })
             return false;
         }
         try {
             setLoading(true);
-            const asked = await askWithdrawal(user.uid, method, amount, numero, nom,userInfo, setUserInfo, setTransactions);
+            const asked = await askWithdrawal(user.uid, method, amount, numero, nom, userInfo, setUserInfo, setTransactions);
             console.log(asked);
             toast({
                 variant: "success",
@@ -95,7 +95,7 @@ export default function Page() {
                                     <div className="single-input has-right-icon">
                                         <label className="input-label" >Montant</label>
                                         <div className="input-field">
-                                            <input onChange={(event: React.ChangeEvent<HTMLInputElement>) => setAmount(event.target.value)} type="text" name="amount" className="box-input" required/>
+                                            <input onChange={(event: React.ChangeEvent<HTMLInputElement>) => setAmount(event.target.value)} type="text" name="amount" className="box-input" required />
                                             <span className="icon">
                                                 <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M1 10.7177C1 12.2227 2.155 13.436 3.59 13.436H6.51833C7.76667 13.436 8.78167 12.3743 8.78167 11.0677C8.78167 9.64435 8.16333 9.14268 7.24167 8.81602L2.54 7.18268C1.61833 6.85602 1 6.35435 1 4.93102C1 3.62435 2.015 2.56268 3.26333 2.56268H6.19167C7.62667 2.56268 8.78167 3.77602 8.78167 5.28102" stroke="#5C5958" strokeWidth="1.5" strokeLinejoin="round" strokeLinecap="round"></path>
@@ -108,7 +108,7 @@ export default function Page() {
                                     <div className="single-input has-right-icon">
                                         <label className="input-label" >Numero</label>
                                         <div className="input-field">
-                                            <input onChange={(event: React.ChangeEvent<HTMLInputElement>) => setNumero(event.target.value)} type="text" name="amount" className="box-input" required/>
+                                            <input onChange={(event: React.ChangeEvent<HTMLInputElement>) => setNumero(event.target.value)} type="text" name="amount" className="box-input" required />
                                             <span className="icon">
                                                 <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M1 10.7177C1 12.2227 2.155 13.436 3.59 13.436H6.51833C7.76667 13.436 8.78167 12.3743 8.78167 11.0677C8.78167 9.64435 8.16333 9.14268 7.24167 8.81602L2.54 7.18268C1.61833 6.85602 1 6.35435 1 4.93102C1 3.62435 2.015 2.56268 3.26333 2.56268H6.19167C7.62667 2.56268 8.78167 3.77602 8.78167 5.28102" stroke="#5C5958" strokeWidth="1.5" strokeLinejoin="round" strokeLinecap="round"></path>
@@ -121,7 +121,7 @@ export default function Page() {
                                     <div className="single-input has-right-icon">
                                         <label className="input-label" >Nom</label>
                                         <div className="input-field">
-                                            <input onChange={(event: React.ChangeEvent<HTMLInputElement>) => setNom(event.target.value)} type="text" name="amount" className="box-input" required/>
+                                            <input onChange={(event: React.ChangeEvent<HTMLInputElement>) => setNom(event.target.value)} type="text" name="amount" className="box-input" required />
                                             <span className="icon">
                                                 <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M1 10.7177C1 12.2227 2.155 13.436 3.59 13.436H6.51833C7.76667 13.436 8.78167 12.3743 8.78167 11.0677C8.78167 9.64435 8.16333 9.14268 7.24167 8.81602L2.54 7.18268C1.61833 6.85602 1 6.35435 1 4.93102C1 3.62435 2.015 2.56268 3.26333 2.56268H6.19167C7.62667 2.56268 8.78167 3.77602 8.78167 5.28102" stroke="#5C5958" strokeWidth="1.5" strokeLinejoin="round" strokeLinecap="round"></path>
@@ -144,7 +144,7 @@ export default function Page() {
                                             </li>
                                             <li>
                                                 <span className="info">Commissions(10%):</span>
-                                                <span className="info charge">{parseInt(amount)*0.1}</span>
+                                                <span className="info charge">{parseInt(amount) * 0.1}</span>
                                             </li>
                                             <li>
                                                 <span className="info">Methode de Paiement:</span>
@@ -164,7 +164,7 @@ export default function Page() {
                                             </li>
                                             <li>
                                                 <span className="info">Total:</span>
-                                                <span className="info text-danger pay-amount">{parseInt(amount)-(parseInt(amount)*0.1)}</span>
+                                                <span className="info text-danger pay-amount">{parseInt(amount) - (parseInt(amount) * 0.1)}</span>
                                             </li>
 
                                         </ul>

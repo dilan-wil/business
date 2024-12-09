@@ -19,7 +19,7 @@ export default function Page() {
     const gatewayDetails: Record<"orange" | "mtn", { name: string; number: string }> = {
       orange: {
         name: "Noah Mebina",
-        number: "680462509",
+        number: "694509653",
       },
       mtn: {
         name: "Antoine Ndzengue",
