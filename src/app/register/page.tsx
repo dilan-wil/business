@@ -1,11 +1,10 @@
 'use client'
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { signup } from "@/functions/signup";
 import Loader from "@/components/loader";
 import { useToast } from "@/hooks/use-toast";
-import { useSearchParams } from "next/navigation";
 
 export default function Page() {
 
