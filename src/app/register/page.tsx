@@ -97,9 +97,6 @@ function SignUp() {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        if(invite){
-            setFormData({...formData, referral_code: Array.isArray(invite) ? invite[0] : invite})
-        }
         setLoading(true)
         console.log(formData)
         const signUp = await signup(formData)
@@ -201,7 +198,7 @@ function SignUp() {
                                     <div className="single-input mb-3">
                                         <label className="input-label">Code de parrainage</label>
                                         <div className="input-field">
-                                            <input onChange={handleChange} type="text" name="referral_code" className="box-input" />
+                                            <input value={invite ? invite : ""} onChange={handleChange} type="text" name="referral_code" className="box-input" />
                                         </div>
                                     </div>
                                     <div className="single-input has-right-icon has-left-icon">

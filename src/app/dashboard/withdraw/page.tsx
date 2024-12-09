@@ -33,25 +33,33 @@ export default function Page() {
             return false;
         }
         try {
-            setLoading(true)
-            const asked = await askWithdrawal(user.uid, method, amount, numero, userInfo, setUserInfo, setTransactions)
-            console.log(asked)
+            setLoading(true);
+            const asked = await askWithdrawal(user.uid, method, amount, numero, userInfo, setUserInfo, setTransactions);
+            console.log(asked);
             toast({
                 variant: "success",
                 title: "Demande de retrait réussi.",
-                description: "Votre requete a été envoyée. Vous recevrez vos fond dans un délai de 24h.",
-              })
-        } catch {
-            toast({
-                variant: "destructive",
-                title: "Erreur de retrait.",
-                description: "Rassurez vous d'avoir les fonds nécessaires et d'entrer les bonnes informations.",
-              })
+                description: "Votre requete a été envoyée. Vous recevrez vos fonds dans un délai de 24h.",
+            });
+        } catch (error) {
+            if (error instanceof Error && error.message === "Amount must be greater than 1200") {
+                toast({
+                    variant: "destructive",
+                    title: "Erreur de retrait.",
+                    description: "Le montant minimum de retrait est de 1200.",
+                });
+            } else {
+                toast({
+                    variant: "destructive",
+                    title: "Erreur de retrait.",
+                    description: "Rassurez-vous d'avoir les fonds nécessaires et d'entrer les bonnes informations.",
+                });
+            }
         } finally {
-            setLoading(false)
-            setAmount("")
-            setMethod("")
-            setNumero("")
+            setLoading(false);
+            setAmount("");
+            setMethod("");
+            setNumero("");
         }
     }
     return (

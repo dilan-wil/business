@@ -5,8 +5,8 @@ export async function askWithdrawal(userId: string, gateway: string, amount: str
     try {
         // Validate input
         const newAmount = parseInt(amount)
-        if (newAmount <= 500) {
-            throw new Error("Amount must be greater than 500.");
+        if (newAmount < 1200) {
+            throw new Error("Amount must be greater than 1200.");
         }
 
         // Reference to the user's document

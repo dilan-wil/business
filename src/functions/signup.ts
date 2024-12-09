@@ -11,6 +11,7 @@ interface FormData {
   country: string;
   telephone: string,
   referral_code: string 
+  invite?: string 
 }
 
 export async function signup(formData: FormData) {
