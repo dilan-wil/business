@@ -1,3 +1,4 @@
+import Link from "next/link";
 
 
 export function Navbar({ opened, setOpened, userInfo }: { opened: boolean, setOpened: (value: boolean) => void, userInfo: any }) {
@@ -23,7 +24,7 @@ export function Navbar({ opened, setOpened, userInfo }: { opened: boolean, setOp
                                                 <img src="https://paytimecash.9r3.site/assets/frontend/images/user.jpg" alt="Nuadje Dilan" />
                                             </div>
                                             <div className="content">
-                                                <h4 className="title">{userInfo.first_name} {userInfo.last_name}</h4>
+                                                <h4 className="title">{userInfo?.first_name} {userInfo?.last_name}</h4>
                                             </div>
                                         </div>
                                         <div className="info-list">
@@ -31,15 +32,15 @@ export function Navbar({ opened, setOpened, userInfo }: { opened: boolean, setOp
                                                 <li>
                                                     <div className="content">
                                                         <div className="icon"> <i className="icon-profile-circle"></i> </div>
-                                                        <div className="info"> <a href="https://paytimecash.9r3.site/user/settings">Profile Settings</a> </div>
+                                                        <div className="info"> <Link href="/dashboard/settings">Profile Settings</Link> </div>
                                                     </div>
                                                 </li>
-                                                <li>
+                                                {/* <li>
                                                     <div className="content">
                                                         <div className="icon"> <i className="icon-lock"></i> </div>
                                                         <div className="info"> <a href="https://paytimecash.9r3.site/user/change-password">Change Password</a> </div>
                                                     </div>
-                                                </li>
+                                                </li> */}
                                             </ul>
                                         </div>
                                         <div className="user-logout">
