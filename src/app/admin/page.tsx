@@ -7,6 +7,8 @@ type User = {
   id: string;
   name: string;
   balance: number;
+  deposits?: number;
+  // balance: number;
   plans: { id: string; name: string; price: number; daily: boolean; purchaseDate: string; times: number; lastClicked: string; }[];
 };
 
@@ -21,6 +23,7 @@ export default function AdminPage() {
           id: user.id,
           name: user.first_name,
           balance: user.balance,
+          deposits: user.deposits,
           plans: user.plans,
         }));
         setUsers(formattedUsers);
@@ -58,7 +61,7 @@ export default function AdminPage() {
                   <th>ID</th>
                   <th>Name</th>
                   <th>Balance</th>
-                  <th>Plans</th>
+                  <th>Deposit Made</th>
                 </tr>
               </thead>
               <tbody>
@@ -67,6 +70,7 @@ export default function AdminPage() {
                     <td>{user.id}</td>
                     <td>{user.name}</td>
                     <td>{user.balance}</td>
+                    <td>{user?.deposits}</td>
                     {/* <td>
                       {user.plans.map((plan, i) => (
                         <div key={i}>
