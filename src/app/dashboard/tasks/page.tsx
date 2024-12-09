@@ -21,6 +21,7 @@ export default function Page() {
   const { userInfo, setUserInfo, setTransactions } = useAuth();
   const [loading, setLoading] = useState(false);
   const { toast } = useToast()
+
   const handleTaskClick = async (plan: Plan) => {
     if (loading) return;
 
@@ -132,48 +133,53 @@ export default function Page() {
             </div>
             <div className="ads-item-inner">
               <div className="row">
-                {userInfo?.plans.map((plan: Plan) => (
-                  <div key={plan.id} className="ads-single-item">
-                    <div className="content-inner">
-                      <div className="contents">
-                        <h3 className="title">{plan.name}</h3>
-                        <span className="rounded-pill badge">Plan</span>
-                        <p className="description">Durée: 3 Secondes</p>
-                        <p>Restant: {plan.times} fois</p>
-                        <p>
-                          Dernier clique:{" "}
-                          {plan.lastClicked
-                            ? new Intl.DateTimeFormat("fr-FR", {
-                              dateStyle: "medium",
-                              timeStyle: "short",
-                            }).format(new Date(plan.lastClicked))
-                            : "Aucun clic précédent"}
-                        </p>                        <h4 className="currency">XAF{plan.daily}</h4>
+                {userInfo?.plans && userInfo.plans.length > 0 ? (
+                  userInfo.plans.map((plan: Plan) => (
+                    <div key={plan.id} className="ads-single-item">
+                      <div className="content-inner">
+                        <div className="contents">
+                          <h3 className="title">{plan.name}</h3>
+                          <span className="rounded-pill badge">Plan</span>
+                          <p className="description">Durée: 3 Secondes</p>
+                          <p>Restant: {plan.times} fois</p>
+                          <p>
+                            Dernier clique:{" "}
+                            {plan.lastClicked
+                              ? new Intl.DateTimeFormat("fr-FR", {
+                                dateStyle: "medium",
+                                timeStyle: "short",
+                              }).format(new Date(plan.lastClicked))
+                              : "Aucun clic précédent"}
+                          </p>
+                          <h4 className="currency">XAF{plan.daily}</h4>
+                        </div>
+                        <div className="btn-wrap">
+                          <button
+                            className="site-btn"
+                            onClick={() => handleTaskClick(plan)}
+                            // disabled={
+                            //   loading ||
+                            //   plan.times <= 0 ||
+                            //   (plan.lastClicked &&
+                            //     (new Date().getTime() - new Date(plan.lastClicked).getTime()) < 24 * 60 * 60 * 1000) ||
+                            //   plan.lastClicked === ""
+                            // }
+                          >
+                            <i className="icon-eye"></i> {loading ? <Loader2 className="animate-spin" /> : "Effectuez la tâche"}
+                          </button>
+                        </div>
                       </div>
-                      <div className="btn-wrap">
-                        <button
-                          className="site-btn"
-                          onClick={() => handleTaskClick(plan)}
-                          // disabled={
-                          //   loading ||
-                          //   plan.times <= 0 ||
-                          //   (plan.lastClicked &&
-                          //     (new Date().getTime() - new Date(plan.lastClicked).getTime()) < 24 * 60 * 60 * 1000) ||
-                          //   plan.lastClicked === ""
-                          // }
-                        >
-                          <i className="icon-eye"></i> {loading ? <Loader2 className="animate-spin" /> : "Effectuez la tâche"}
-                        </button>
+                      <div className="bg-pattern">
+                        <img
+                          src="https://paytimecash.9r3.site/assets/frontend/default/images/shapes/ads-pattern.png"
+                          alt={plan.name}
+                        />
                       </div>
                     </div>
-                    <div className="bg-pattern">
-                      <img
-                        src="https://paytimecash.9r3.site/assets/frontend/default/images/shapes/ads-pattern.png"
-                        alt={plan.name}
-                      />
-                    </div>
-                  </div>
-                ))}
+                  ))
+                ) : (
+                  <p>Vous devez payer un plan pour voir vos plans</p>
+                )}
               </div>
             </div>
           </div>
