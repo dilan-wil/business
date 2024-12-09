@@ -177,7 +177,7 @@ export default function Page() {
                                             <div className="single-input">
                                                 <label className="input-label">Date Rejoint</label>
                                                 <div className="input-field">
-                                                    <input type="text" className="box-input" placeholder="22 Nov 2024 10:54 PM" readOnly />
+                                                    <input type="text" className="box-input" placeholder={userInfo?.createdAt} readOnly />
                                                 </div>
                                             </div>
                                         </div>

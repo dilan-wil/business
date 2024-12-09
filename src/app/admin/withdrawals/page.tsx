@@ -1,4 +1,3 @@
-// pages/withdrawal.tsx
 "use client";
 import { useState, useEffect } from "react";
 import { db } from "@/functions/firebase"; // Import your Firebase instance
@@ -57,6 +56,29 @@ const WithdrawalPage = () => {
     );
   };
 
+  const handleRefuseStatus = async (w: any) => {
+    // Update withdrawal status to 'failed' in Firestore
+    const withdrawalRef = doc(db, "withdrawals", w.id);
+    await updateDoc(withdrawalRef, { status: "failed" });
+
+    // Update the corresponding transaction status in the user's subcollection
+    const transactionsCollectionRef = doc(
+      db,
+      "users",
+      w.userId,
+      "transactions",
+      w.id
+    );
+    await updateDoc(transactionsCollectionRef, { status: "failed" });
+
+    // Update the local state to reflect the change
+    setWithdrawals(
+      withdrawals.map((item) =>
+        item.id === w.id ? { ...item, status: "failed" } : item
+      )
+    );
+  };
+
   return (
     <div>
       <h1>Withdrawal</h1>
@@ -85,9 +107,14 @@ const WithdrawalPage = () => {
                 </tbody>
               </table>
               {w.status === "pending" && (
-                <button onClick={() => handleUpdateStatus(w)}>
-                  Mark as Success
-                </button>
+                <div>
+                  <button onClick={() => handleUpdateStatus(w)}>
+                    Mark as Success
+                  </button>
+                  <button onClick={() => handleRefuseStatus(w)}>
+                    Refuse
+                  </button>
+                </div>
               )}
             </li>
             <hr />

@@ -11,7 +11,7 @@ type Deposit = {
 };
 
 const AdminDepositPage = () => {
-  const [deposits, setDeposits] = useState<Deposit[]>([]); // Specify the type here
+  const [deposits, setDeposits] = useState<Deposit[]>([]);
 
   // Fetch pending deposits
   const fetchDeposits = async () => {
@@ -20,7 +20,7 @@ const AdminDepositPage = () => {
         query(collection(db, "deposits"), where("status", "==", "pending"))
       );
       const fetchedDeposits = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })) as Deposit[];
-      setDeposits(fetchedDeposits); // Assign fetched deposits
+      setDeposits(fetchedDeposits);
     } catch (error) {
       console.error("Error fetching deposits:", error);
     }
@@ -52,6 +52,25 @@ const AdminDepositPage = () => {
     }
   };
 
+  // Refuse deposit logic
+  const refuseDeposit = async (depositId: string, userUid: string) => {
+    try {
+      // Update deposit status to failed
+      const depositRef = doc(db, "deposits", depositId);
+      await updateDoc(depositRef, { status: "failed" });
+
+      // Update user's transaction status to failed
+      const userDocRef = doc(db, "users", userUid);
+      const transactionRef = doc(collection(userDocRef, "transactions"), depositId);
+      await updateDoc(transactionRef, { status: "failed" });
+
+      console.log("Deposit refused and updated to failed.");
+      fetchDeposits(); // Refresh the list of deposits
+    } catch (error) {
+      console.error("Error refusing deposit:", error);
+    }
+  };
+
   useEffect(() => {
     fetchDeposits();
   }, []);
@@ -67,6 +86,9 @@ const AdminDepositPage = () => {
             <p>User ID: {deposit.userUid}</p>
             <button onClick={() => approveDeposit(deposit.id, deposit.userUid, deposit.amount)}>
               Approve
+            </button>
+            <button onClick={() => refuseDeposit(deposit.id, deposit.userUid)}>
+              Refuse
             </button>
           </li>
         ))}
