@@ -10,7 +10,7 @@ import { useToast } from "@/hooks/use-toast";
 export default function Page() {
     const { user, userInfo, setTransactions, setUserInfo } = useAuth()
     const [selectedGateway, setSelectedGateway] = useState<"orange" | "mtn" | "">("");
-    const [amount, setAmount] = useState("0");
+    const [amount, setAmount] = useState("");
     const [transactionID, setTransactionID] = useState("");
     const [loading, setLoading] = useState(false);
     const { toast } = useToast()
@@ -76,7 +76,7 @@ export default function Page() {
       } finally {
         setLoading(false);
         setTransactionID("");
-        setAmount("0");
+        setAmount("");
         setSelectedGateway("");
       }
     };
