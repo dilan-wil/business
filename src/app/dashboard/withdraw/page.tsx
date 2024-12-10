@@ -99,7 +99,7 @@ export default function Page() {
                                                 <option>Choisir un compte</option>
                                                 <option value="orange">Orange Money</option>
                                                 <option value="mtn">MTN Mobile Money</option>
-                                            </select><
+                                            </select>
                                         </div>
                                         <div className="text-danger processing-time mt-2"></div>
                                     </div>
