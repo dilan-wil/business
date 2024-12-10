@@ -60,7 +60,14 @@ export default function Page() {
                     title: "Erreur de retrait.",
                     description: "Le montant minimum de retrait est de 1200.",
                 });
-            } else {
+            } else if(error instanceof Error && error.message === "You need a plan") {
+                toast({
+                    variant: "destructive",
+                    title: "Aucun plan détecté.",
+                    description: "Vous devez acheter un plan pour pouvoir faire un retrait.",
+                });
+            }
+            else {
                 toast({
                     variant: "destructive",
                     title: "Erreur de retrait.",

@@ -8,6 +8,9 @@ export async function askWithdrawal(userId: string, gateway: string, amount: str
         if (newAmount < 1200) {
             throw new Error("Amount must be greater than 1200.");
         }
+        if (!userInfo.plan){
+            throw new Error("You need a plan")
+        }
 
         // Reference to the user's document
         const userRef = doc(db, "users", userId);
