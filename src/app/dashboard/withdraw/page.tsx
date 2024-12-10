@@ -24,6 +24,16 @@ export default function Page() {
         const currentHour = now.getUTCHours() + 1; // Adjust to GMT+1
         const currentMinutes = now.getUTCMinutes();
 
+
+        if (!amount || !method || !numero || !nom) {
+            toast({
+                variant: "destructive",
+                title: "Formulaire imcomplet",
+                description: "Veuillez remplir tout les champs.",
+            })
+            return;
+        }
+
         // Check if the time is outside 9 AM to 7 PM
         if (currentHour < 9 || (currentHour === 20 && currentMinutes > 0) || currentHour > 20) {
             toast({
@@ -33,6 +43,7 @@ export default function Page() {
             })
             return false;
         }
+        
         try {
             setLoading(true);
             const asked = await askWithdrawal(user.uid, method, amount, numero, nom, userInfo, setUserInfo, setTransactions);
