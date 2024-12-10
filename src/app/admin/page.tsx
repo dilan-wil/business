@@ -16,6 +16,7 @@ export default function AdminPage() {
   const [users, setUsers] = useState<User[]>([]);
   const [totalDeposits, setTotalDeposits] = useState(0);
   const [totalWithdrawals, setTotalWithdrawals] = useState(0);
+  const [totalUsers, setTotalUsers] = useState(0);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -37,6 +38,7 @@ export default function AdminPage() {
         const total = totalDeposits - 240000 - 50000 - 21000
         setTotalDeposits(total);
         setTotalWithdrawals(totalWithdrawals);
+        setTotalUsers(formattedUsers.length)
       } catch (error) {
         console.error("Error fetching users:", error);
       }
@@ -69,6 +71,7 @@ export default function AdminPage() {
             <div className="totals">
               <h3>Total Deposits: {totalDeposits}</h3>
               <h3>Total Withdrawals: {totalWithdrawals}</h3>
+              <h3>Total Users: {totalUsers}</h3>
             </div>
             <table className="table">
               <thead>
