@@ -60,7 +60,14 @@ export default function Page() {
                     title: "Erreur de retrait.",
                     description: "Le montant minimum de retrait est de 1200.",
                 });
-            } else {
+            } else if(error instanceof Error && error.message === "You need a plan") {
+                toast({
+                    variant: "destructive",
+                    title: "Aucun plan détecté.",
+                    description: "Vous devez acheter un plan pour pouvoir faire un retrait.",
+                });
+            }
+            else {
                 toast({
                     variant: "destructive",
                     title: "Erreur de retrait.",
@@ -99,7 +106,7 @@ export default function Page() {
                                                 <option>Choisir un compte</option>
                                                 <option value="orange">Orange Money</option>
                                                 <option value="mtn">MTN Mobile Money</option>
-                                            </select><
+                                            </select>
                                         </div>
                                         <div className="text-danger processing-time mt-2"></div>
                                     </div>

@@ -22,8 +22,8 @@ export default function Page() {
         number: "699036002",
       },
       mtn: {
-        name: "Antoine Ndzengue",
-        number: "680894121",
+        name: "Azemkou Tedjieu",
+        number: "679261793",
       },
     };
   

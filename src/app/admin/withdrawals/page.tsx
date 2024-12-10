@@ -80,11 +80,14 @@ const WithdrawalPage = () => {
     );
   };
 
+  // Filter withdrawals to only include those with "pending" status
+  const pendingWithdrawals = withdrawals.filter((w) => w.status === "pending");
+
   return (
     <div>
       <h1>Withdrawal</h1>
       <ul>
-        {withdrawals.map((w: any) => (
+        {pendingWithdrawals.map((w: any) => (
           <div key={w.id}>
             <li>
               <table>
@@ -108,16 +111,14 @@ const WithdrawalPage = () => {
                   </tr>
                 </tbody>
               </table>
-              {w.status === "pending" && (
-                <div>
-                  <button onClick={() => handleUpdateStatus(w)}>
-                    Mark as Success
-                  </button>&nbsp;&nbsp;&nbsp;&nbsp;
-                  <button onClick={() => handleRefuseStatus(w)}>
-                    Refuse
-                  </button>
-                </div>
-              )}
+              <div>
+                <button onClick={() => handleUpdateStatus(w)}>
+                  Mark as Success
+                </button>&nbsp;&nbsp;&nbsp;&nbsp;
+                <button onClick={() => handleRefuseStatus(w)}>
+                  Refuse
+                </button>
+              </div>
             </li>
             <hr />
           </div>
