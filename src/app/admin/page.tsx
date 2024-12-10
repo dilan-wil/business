@@ -34,8 +34,8 @@ export default function AdminPage() {
         // Calculate totals
         const totalDeposits = formattedUsers.reduce((sum: number, user: User) => sum + (user.deposits || 0), 0);
         const totalWithdrawals = formattedUsers.reduce((sum: number, user: User) => sum + (user.withdrawals || 0), 0);
-
-        setTotalDeposits(totalDeposits);
+        const total = totalDeposits - 240000 - 50000 - 21000
+        setTotalDeposits(total);
         setTotalWithdrawals(totalWithdrawals);
       } catch (error) {
         console.error("Error fetching users:", error);
