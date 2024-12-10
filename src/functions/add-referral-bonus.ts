@@ -21,7 +21,7 @@ const addReferralBonus = async (level1ReferrerCode: string, depositAmount : numb
             // Update level 2 referrer's referral earnings with 3% of the deposit
             await updateDoc(doc(db, "users", level2ReferrerCode), {
               referralEarnings: increment(depositAmount * 0.03),
-              balance: increment(depositAmount * 0.3),
+              balance: increment(depositAmount * 0.03),
         });
 
             // Fetch level 3 referrer's code from level 2 referrer
@@ -32,7 +32,7 @@ const addReferralBonus = async (level1ReferrerCode: string, depositAmount : numb
                 // Update level 3 referrer's referral earnings with 1% of the deposit
                 await updateDoc(doc(db, "users", level3ReferrerCode), {
                   referralEarnings: increment(depositAmount * 0.01),
-                  balance: increment(depositAmount * 0.3),
+                  balance: increment(depositAmount * 0.01),
                 });
               }
             }
