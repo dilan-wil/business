@@ -18,8 +18,8 @@ export default function Page() {
     // Gateway details
     const gatewayDetails: Record<"orange" | "mtn", { name: string; number: string }> = {
       orange: {
-        name: "Noah Mebina",
-        number: "694509653",
+        name: "Teudjeu Marvin",
+        number: "695028300",
       },
       mtn: {
         name: "Antoine Ndzengue",
