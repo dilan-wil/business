@@ -8,12 +8,14 @@ type User = {
   name: string;
   balance: number;
   deposits?: number;
-  // balance: number;
+  withdrawals?: number;
   plans: { id: string; name: string; price: number; daily: boolean; purchaseDate: string; times: number; lastClicked: string; }[];
 };
 
 export default function AdminPage() {
   const [users, setUsers] = useState<User[]>([]);
+  const [totalDeposits, setTotalDeposits] = useState(0);
+  const [totalWithdrawals, setTotalWithdrawals] = useState(0);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -23,10 +25,18 @@ export default function AdminPage() {
           id: user.id,
           name: user.first_name,
           balance: user.balance,
-          deposits: user.deposits,
+          deposits: user.deposits || 0,
+          withdrawals: user.withdrawals || 0,
           plans: user.plans,
         }));
         setUsers(formattedUsers);
+
+        // Calculate totals
+        const totalDeposits = formattedUsers.reduce((sum: number, user: User) => sum + (user.deposits || 0), 0);
+        const totalWithdrawals = formattedUsers.reduce((sum: number, user: User) => sum + (user.withdrawals || 0), 0);
+
+        setTotalDeposits(totalDeposits);
+        setTotalWithdrawals(totalWithdrawals);
       } catch (error) {
         console.error("Error fetching users:", error);
       }
@@ -55,13 +65,19 @@ export default function AdminPage() {
         </div>
         <div className="row justify-content-center gy-30">
           <div className="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+            {/* Display Total Deposits and Withdrawals */}
+            <div className="totals">
+              <h3>Total Deposits: {totalDeposits}</h3>
+              <h3>Total Withdrawals: {totalWithdrawals}</h3>
+            </div>
             <table className="table">
               <thead>
                 <tr>
                   <th>ID</th>
                   <th>Name</th>
                   <th>Balance</th>
-                  <th>Deposit Made</th>
+                  <th>Deposits</th>
+                  <th>Withdrawals</th>
                 </tr>
               </thead>
               <tbody>
@@ -70,18 +86,8 @@ export default function AdminPage() {
                     <td>{user.id}</td>
                     <td>{user.name}</td>
                     <td>{user.balance}</td>
-                    <td>{user?.deposits}</td>
-                    {/* <td>
-                      {user.plans.map((plan, i) => (
-                        <div key={i}>
-                          <strong>Plan Name:</strong> {plan.name}<br />
-                          <strong>Price:</strong> {plan.price}<br />
-                          <strong>Purchase Date:</strong> {new Date(plan.purchaseDate).toLocaleDateString()}<br />
-                          <strong>Times:</strong> {plan.times}<br />
-                          <strong>Last Clicked:</strong> {new Date(plan.lastClicked).toLocaleString()}
-                        </div>
-                      ))}
-                    </td> */}
+                    <td>{user.deposits}</td>
+                    <td>{user.withdrawals}</td>
                   </tr>
                 ))}
               </tbody>
