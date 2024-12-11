@@ -339,7 +339,7 @@ export default function Page(){
                                     </div>
                                     <div className="single-card">
                                         <span className="info-title">Gains de parrainage</span>
-                                        <h3 className="number">{userInfo.referralEarnings ? userInfo.referralEarnings : 0}</h3>
+                                        <h3 className="number">{userInfo?.referralEarnings ? userInfo?.referralEarnings : 0}</h3>
                                         <p className="description">Gains grace au parrainage</p>
                                         <div className="btn-inner">
                                             <Link className="round-btn"
