@@ -177,7 +177,6 @@ export default function Page() {
                             type="text"
                             name="montant"
                             id="montant"
-                            value={amount}
                             placeholder="Entrez le montant"
                             onChange={(event: React.ChangeEvent<HTMLInputElement>) => setAmount(event.target.value)}
                             required
