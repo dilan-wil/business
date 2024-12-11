@@ -83,7 +83,10 @@ export const BuyPlan = ({ id, name, price, daily, total }: Plan) => {
       setUserInfo({ ...userInfo, balance: newBalance,plans: [...(userInfo?.plans || []), newPlan], });
       // Update transactions by appending the new transaction
       setTransactions((prevTransactions: any) => [...prevTransactions, newTransaction]);
-      await addReferralBonus(userInfo.referredBy, selectedPlan.price)
+
+      if(!userInfo.plan){
+        await addReferralBonus(userInfo.referredBy, selectedPlan.price)
+      }
 
       toast({
         variant: "success",
