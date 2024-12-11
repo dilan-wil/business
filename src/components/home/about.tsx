@@ -122,7 +122,7 @@ export function About() {
                 </div>
                 <div className="content">
                     <h3 className="title">Recevez votre argent</h3>
-                    <p className="description">Vous pouvez demander un retrait une fois que vous avez atteint le seuil minimum de retrait de 500, et être payé instantanément.</p>
+                    <p className="description">Vous pouvez demander un retrait une fois que vous avez atteint le seuil minimum de retrait de 1200 frs, et être payé instantanément.</p>
                 </div>
             </div>
                     </div>

@@ -68,21 +68,26 @@ export default function Page() {
           : p
       );
 
-      const newBalance = userInfo?.balance + plan.daily;
+      const totalDailyEarnings = userInfo?.plans
+      .filter((p: Plan) => p.id === plan.id)
+      .reduce((sum: number, p: Plan) => sum + (p.times > 0 ? p.daily : 0), 0);
+
+
+      const newBalance = userInfo?.balance + totalDailyEarnings;
 
       // Update Firestore with new plans data and balance
       await updateDoc(userDocRef, {
         plans: updatedPlans,
         balance: newBalance,
-        earned: plan.daily
+        earned: totalDailyEarnings
       });
 
       const transactionsCollectionRef = collection(userDocRef, "transactions");
       const newTransaction = {
-        description: `Gain ${plan.times - 70} du plan ${plan.name}`,
+        description: `Gain ${plan.times - 70} de tout vos plans ${plan.name}`,
         transactionId: plan.name,
         type: "Taches",
-        amount: plan.daily,
+        amount: totalDailyEarnings,
         charge: 0,
         status: "success",
         method: "system",
