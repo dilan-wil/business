@@ -10,6 +10,7 @@ import { useToast } from "@/hooks/use-toast";
 type Plan = {
   id: string;
   name: string;
+  instanceId: string;
   price: string;
   daily: number;
   times: number;
@@ -69,9 +70,8 @@ export default function Page() {
       );
 
       const totalDailyEarnings = userInfo?.plans
-      .filter((p: Plan) => p.id === plan.id)
-      .reduce((sum: number, p: Plan) => sum + (p.times > 0 ? p.daily : 0), 0);
-
+        .filter((p: Plan) => p.id === plan.id)
+        .reduce((sum: number, p: Plan) => sum + (p.times > 0 ? p.daily : 0), 0);
 
       const newBalance = userInfo?.balance + totalDailyEarnings;
 
@@ -84,7 +84,7 @@ export default function Page() {
 
       const transactionsCollectionRef = collection(userDocRef, "transactions");
       const newTransaction = {
-        description: `Gain ${plan.times - 70} de tout vos plans ${plan.name}`,
+        description: `Gain du plan ${plan.name}`,
         transactionId: plan.name,
         type: "Taches",
         amount: totalDailyEarnings,

@@ -9,6 +9,7 @@ import { Loader2 } from "lucide-react";
 import addReferralBonus from "@/functions/add-referral-bonus";
 import Loader from "./loader";
 import { useToast } from "@/hooks/use-toast";
+import { v4 as uuidv4 } from "uuid"; // Import if using the uuid library
 
 type Plan = {
   id: string;
@@ -52,6 +53,7 @@ export const BuyPlan = ({ id, name, price, daily, total }: Plan) => {
 
       const newPlan = {
         id: selectedPlan.id,
+        instanceId: uuidv4(),
         name: selectedPlan.name,
         price: selectedPlan.price,
         daily: selectedPlan.daily,
