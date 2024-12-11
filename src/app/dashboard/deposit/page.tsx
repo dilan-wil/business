@@ -174,7 +174,7 @@ export default function Page() {
                             Montant <span className="text-danger">*</span>
                         </label>
                         <input
-                            type="number"
+                            type="text"
                             name="montant"
                             id="montant"
                             value={amount}
