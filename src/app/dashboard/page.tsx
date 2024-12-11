@@ -338,6 +338,49 @@ export default function Page(){
                                         </div>
                                     </div>
                                     <div className="single-card">
+                                        <span className="info-title">Gains de parrainage</span>
+                                        <h3 className="number">{userInfo.referralEarnings ? userInfo.referralEarnings : 0}</h3>
+                                        <p className="description">Gains grace au parrainage</p>
+                                        <div className="btn-inner">
+                                            <Link className="round-btn"
+                                                href="/dashboard/referral"><span><i
+                                                        className="fa-sharp fa-regular fa-arrow-up-long"></i></span></Link>
+                                        </div>
+                                        <div className="icon">
+                                            <span>
+                                                <svg width="30" height="30"
+                                                    viewBox="0 0 30 30"
+                                                    fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M11.4512 13.5875C11.3262 13.575 11.1762 13.575 11.0387 13.5875C8.06367 13.4875 5.70117 11.05 5.70117 8.05C5.70117 4.9875 8.17617 2.5 11.2512 2.5C14.3137 2.5 16.8012 4.9875 16.8012 8.05C16.7887 11.05 14.4262 13.4875 11.4512 13.5875Z"
+                                                        stroke="#800AF6"
+                                                        strokeWidth="2.25"
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"></path>
+                                                    <path
+                                                        d="M20.5121 5C22.9371 5 24.8871 6.9625 24.8871 9.375C24.8871 11.7375 23.0121 13.6625 20.6746 13.75C20.5746 13.7375 20.4621 13.7375 20.3496 13.75"
+                                                        stroke="#800AF6"
+                                                        strokeWidth="2.25"
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"></path>
+                                                    <path
+                                                        d="M5.20039 18.2C2.17539 20.225 2.17539 23.525 5.20039 25.5375C8.63789 27.8375 14.2754 27.8375 17.7129 25.5375C20.7379 23.5125 20.7379 20.2125 17.7129 18.2C14.2879 15.9125 8.65039 15.9125 5.20039 18.2Z"
+                                                        stroke="#800AF6"
+                                                        strokeWidth="2.25"
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"></path>
+                                                    <path
+                                                        d="M22.9258 25C23.8258 24.8125 24.6758 24.45 25.3758 23.9125C27.3258 22.45 27.3258 20.0375 25.3758 18.575C24.6883 18.05 23.8508 17.7 22.9633 17.5"
+                                                        stroke="#800AF6"
+                                                        strokeWidth="2.25"
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"></path>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div className="single-card">
                                         <span className="info-title">Withdraw</span>
                                         <h3 className="number">XAF {userInfo?.withdrawals ? userInfo?.withdrawals : 0}</h3>
                                         <p className="description">Montant totale de retrait</p>

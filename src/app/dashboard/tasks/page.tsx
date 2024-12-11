@@ -74,6 +74,7 @@ export default function Page() {
       await updateDoc(userDocRef, {
         plans: updatedPlans,
         balance: newBalance,
+        earned: plan.daily
       });
 
       const transactionsCollectionRef = collection(userDocRef, "transactions");
