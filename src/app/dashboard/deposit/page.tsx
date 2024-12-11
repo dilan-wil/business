@@ -18,7 +18,7 @@ export default function Page() {
     // Gateway details
     const gatewayDetails: Record<"orange" | "mtn", { name: string; number: string }> = {
       orange: {
-        name: "Adam Pierre Mohamed",
+        name: "Pierre Mohamed Ndam",
         number: "699036002",
       },
       mtn: {
